@@ -5,10 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>O Panquecão - Cardápio Digital</title>
     
-    <!-- Favicon e Ícones -->
-    <link rel="icon" type="image/x-icon" href="imagem/favicon.ico">
-    <link rel="shortcut icon" href="imagem/favicon.ico" type="image/x-icon">
-    <link rel="apple-touch-icon" href="imagem/favicon.ico">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
     
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -62,9 +60,7 @@
         }
 
         @media (max-width: 640px) {
-            .sticky-tabs {
-                justify-content: flex-start;
-            }
+            .sticky-tabs { justify-content: flex-start; }
         }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -78,14 +74,13 @@
             border-radius: 1.25rem;
             box-shadow: 0 2px 4px rgba(0,0,0,0.05);
             transition: transform 0.2s;
+            margin-bottom: 1rem;
         }
 
-        /* Lógica de inversão: Esconde recursos de admin por padrão */
+        /* Lógica Admin/Cliente */
         .admin-only { display: none !important; }
         body.admin-mode .admin-only { display: flex !important; }
         body.admin-mode .admin-block { display: block !important; }
-        
-        /* Esconde elementos de cliente no modo admin se necessário */
         body.admin-mode .client-only { display: none !important; }
 
         .whatsapp-float {
@@ -103,56 +98,55 @@
             font-size: 30px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             z-index: 100;
-            transition: transform 0.2s;
         }
-        .whatsapp-float:active { transform: scale(0.9); }
 
-        /* Estilo para Impressão e Impressora Térmica (80mm) */
+        /* Estilo para Impressora Térmica */
         @media print {
             @page { margin: 0; size: 80mm auto; }
             body * { visibility: hidden; }
-            #print-area, #print-area * { visibility: visible; color: black !important; }
+            #print-area, #print-area * { visibility: visible; }
             #print-area {
-                position: absolute; left: 0; top: 0; width: 100%;
-                padding: 10mm 5mm; display: block !important;
+                position: absolute; left: 0; top: 0; width: 80mm;
+                padding: 5mm; display: block !important;
                 background: white !important;
-                font-family: 'Courier New', Courier, monospace;
+                font-family: 'Courier New', monospace;
+                color: black !important;
+                font-size: 10pt;
             }
-            .thermal-header { font-size: 18pt; font-weight: bold; text-align: center; border-bottom: 2px solid black; margin-bottom: 5mm; padding-bottom: 2mm; }
-            .thermal-client { font-size: 14pt; font-weight: bold; margin-bottom: 3mm; text-transform: uppercase; border: 1px solid black; padding: 2mm; text-align: center; }
-            .thermal-total { font-size: 16pt; font-weight: bold; text-align: right; margin-top: 5mm; border-top: 2px solid black; padding-top: 2mm; }
-            header, nav, main, footer, .admin-only, .whatsapp-float { display: none !important; }
+            .thermal-header { font-size: 16pt; font-weight: bold; text-align: center; border-bottom: 1px dashed black; margin-bottom: 3mm; padding-bottom: 2mm; }
+            .thermal-client { font-size: 12pt; font-weight: bold; text-align: center; border: 1px solid black; padding: 2mm; margin-bottom: 3mm; }
+            .thermal-item { margin-bottom: 2mm; border-bottom: 1px dotted #ccc; padding-bottom: 1mm; }
+            .thermal-total { font-size: 14pt; font-weight: bold; text-align: right; margin-top: 4mm; border-top: 1px solid black; }
         }
-
         #print-area { display: none; }
     </style>
 </head>
-<body id="main-body" class="pb-20">
+<body id="main-body" class="pb-24">
 
     <!-- Cabeçalho Principal -->
     <header class="bg-white p-6 shadow-sm border-b-4 border-red-600 flex flex-col items-center">
         <h1 class="text-3xl brand-font text-red-600 italic uppercase">O Panquecão</h1>
-        <p id="status-badge" class="mt-2 px-3 py-1 bg-green-100 text-green-700 text-[9px] font-black uppercase rounded-full tracking-wider">Aberto Agora</p>
+        <p id="status-badge" class="mt-2 px-3 py-1 bg-green-100 text-green-700 text-[9px] font-black uppercase rounded-full tracking-wider">Disk Panqueção</p>
     </header>
 
     <!-- Navegação de Categorias -->
     <nav class="sticky-tabs no-scrollbar">
-        <a href="#panquecas-salgadas" class="flex-shrink-0 px-5 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Salgadas</a>
-        <a href="#panquecas-doces" class="flex-shrink-0 px-5 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Doces</a>
-        <a href="#porcoes" class="flex-shrink-0 px-5 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Porções</a>
-        <a href="#pastéis" class="flex-shrink-0 px-5 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Pastéis</a>
-        <a href="#paoquecao" class="flex-shrink-0 px-5 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Pãoquecão</a>
-        <a href="#lasanhas" class="flex-shrink-0 px-5 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Lasanhas</a>
-        <a href="#gelados" class="flex-shrink-0 px-5 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Gelados</a>
-        <a href="#bebidas" class="flex-shrink-0 px-5 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Bebidas</a>
+        <a href="#panquecas-salgadas" class="flex-shrink-0 px-4 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600 active:bg-red-600 active:text-white">Salgadas</a>
+        <a href="#panquecas-doces" class="flex-shrink-0 px-4 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Doces</a>
+        <a href="#porcoes" class="flex-shrink-0 px-4 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Porções</a>
+        <a href="#pastéis" class="flex-shrink-0 px-4 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Pastéis</a>
+        <a href="#paoquecao" class="flex-shrink-0 px-4 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Pãoquecão</a>
+        <a href="#lasanhas" class="flex-shrink-0 px-4 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Lasanhas</a>
+        <a href="#gelados" class="flex-shrink-0 px-4 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Gelados</a>
+        <a href="#bebidas" class="flex-shrink-0 px-4 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Bebidas</a>
     </nav>
 
-    <!-- Info de Funcionamento (Visível para Cliente) -->
+    <!-- Info Funcionamento (Cliente) -->
     <div class="client-only max-w-xl mx-auto w-full p-4">
         <div class="bg-white rounded-2xl p-4 shadow-sm border border-gray-100 flex items-center justify-between">
             <div>
-                <h4 class="text-[10px] font-black uppercase text-gray-400">Atendemos de Quarta-feira a Domingo</h4>
-                <p class="text-xs font-bold text-gray-700">19:00 às 23:00</p>
+                <h4 class="text-[10px] font-black uppercase text-gray-400">Atendimento</h4>
+                <p class="text-xs font-bold text-gray-700">Qua a Dom - 19:00 às 23:00</p>
             </div>
             <div class="text-right">
                 <h4 class="text-[10px] font-black uppercase text-gray-400">Tempo Médio</h4>
@@ -164,84 +158,84 @@
     <!-- Conteúdo do Cardápio -->
     <main class="max-w-xl mx-auto p-4 w-full flex flex-col" id="menu-container"></main>
 
-    <!-- Rodapé Informativo (Cliente) -->
+    <!-- Rodapé (Cliente) -->
     <footer class="client-only max-w-xl mx-auto w-full p-8 text-center text-gray-400">
         <p class="text-[10px] font-black uppercase tracking-widest mb-2">O Panquecão © 2026</p>
-        <p class="text-[9px] font-medium">Preços sujeitos a alterações sem aviso prévio.</p>
     </footer>
 
-    <!-- Botão Flutuante WhatsApp (Cliente) -->
+    <!-- WhatsApp (Cliente) -->
     <a href="https://api.whatsapp.com/send?phone=5551997383849" target="_blank" class="client-only whatsapp-float">
         <i class="fab fa-whatsapp"></i>
     </a>
 
     <!-- Barra de Carrinho (Somente Admin) -->
     <div class="admin-only fixed bottom-6 left-0 right-0 px-4 flex justify-center z-50">
-        <button onclick="toggleCart()" class="w-full max-w-md bg-red-600 text-white p-5 rounded-2xl shadow-2xl flex justify-between items-center transition-transform active:scale-95">
+        <button onclick="toggleCart()" class="w-full max-w-md bg-red-600 text-white p-5 rounded-2xl shadow-2xl flex justify-between items-center">
             <div class="flex items-center space-x-4">
                 <div class="relative flex">
                     <i class="fas fa-shopping-basket text-2xl"></i>
                     <span id="cart-count" class="absolute -top-3 -right-3 bg-yellow-400 text-red-900 text-[11px] font-black w-6 h-6 flex items-center justify-center rounded-full border-2 border-red-600">0</span>
                 </div>
-                <span class="font-black text-sm uppercase">Ver Carrinho (Interno)</span>
+                <span class="font-black text-sm uppercase">Ver Pedido</span>
             </div>
             <span id="cart-total-badge" class="font-black text-xl">R$ 0,00</span>
         </button>
     </div>
 
-    <!-- Modal de Finalização (Somente Admin) -->
-    <div id="cart-modal" class="admin-only fixed inset-0 bg-black/70 z-[100] hidden flex flex-col justify-end sm:justify-center items-center backdrop-blur-sm p-4">
+    <!-- Modal Admin -->
+    <div id="cart-modal" class="fixed inset-0 bg-black/70 z-[100] hidden flex flex-col justify-end items-center backdrop-blur-sm p-4">
         <div class="bg-white w-full max-w-lg rounded-3xl flex flex-col max-h-[90vh] p-6 shadow-2xl overflow-hidden">
             <div class="flex justify-between items-center mb-4">
-                <h2 class="text-xl font-black uppercase italic text-gray-800">Lançar Pedido</h2>
-                <button onclick="toggleCart()" class="text-gray-300 hover:text-red-600 transition-colors"><i class="fas fa-times-circle text-2xl"></i></button>
+                <h2 class="text-xl font-black uppercase text-gray-800 italic">Finalizar Pedido</h2>
+                <button onclick="toggleCart()" class="text-gray-400"><i class="fas fa-times-circle text-2xl"></i></button>
             </div>
             
-            <div class="overflow-y-auto no-scrollbar flex-1 pr-1">
-                <div class="flex flex-col mb-4">
-                    <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1 mb-1">Nome do Cliente</label>
-                    <input type="text" id="client-name" placeholder="EX: JOÃO DA SILVA" class="w-full p-3 bg-gray-50 border-2 border-gray-100 focus:border-red-600 rounded-xl font-black uppercase outline-none transition-all">
-                </div>
-
-                <div id="cart-items" class="flex flex-col space-y-2 mb-4"></div>
-
-                <div class="bg-gray-50 p-4 rounded-xl space-y-3 mb-4 border border-gray-100">
-                    <p class="text-[10px] font-black text-gray-400 uppercase">Destino</p>
-                    <div class="flex space-x-2">
-                        <label class="flex-1 cursor-pointer">
-                            <input type="radio" name="order-type" value="presencial" checked onchange="updateUI()" class="hidden peer">
-                            <div class="p-2 border-2 border-transparent bg-white rounded-lg text-center text-[10px] font-black uppercase peer-checked:border-red-600 peer-checked:bg-red-50 peer-checked:text-red-600">No Local</div>
-                        </label>
-                        <label class="flex-1 cursor-pointer">
-                            <input type="radio" name="order-type" value="entrega" onchange="updateUI()" class="hidden peer">
-                            <div class="p-2 border-2 border-transparent bg-white rounded-lg text-center text-[10px] font-black uppercase peer-checked:border-red-600 peer-checked:bg-red-50 peer-checked:text-red-600">Entrega</div>
-                        </label>
+            <div class="overflow-y-auto no-scrollbar flex-1">
+                <div class="space-y-4 mb-6">
+                    <div>
+                        <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Nome do Cliente</label>
+                        <input type="text" id="client-name" class="w-full p-3 bg-gray-50 border-2 border-gray-100 rounded-xl font-bold uppercase outline-none focus:border-red-600">
                     </div>
-                    
-                    <div id="area-presencial" class="flex space-x-2">
-                        <input type="number" id="mesa" placeholder="Mesa" class="w-20 p-3 bg-white border rounded-xl text-sm font-black text-center outline-none">
-                        <select id="comer-levar" class="flex-1 p-3 bg-white border rounded-xl text-[10px] font-black uppercase outline-none">
-                            <option value="Para Comer Agora">Para Comer Agora</option>
-                            <option value="Embalagem Viagem">Para Viagem</option>
-                        </select>
-                    </div>
-                    
-                    <div id="area-entrega" class="hidden">
-                        <input type="text" id="endereco" placeholder="ENDEREÇO COMPLETO" class="w-full p-3 bg-white border rounded-xl text-[10px] font-black uppercase outline-none">
+
+                    <div id="cart-items" class="space-y-2"></div>
+
+                    <div class="bg-gray-50 p-4 rounded-xl space-y-3">
+                        <div class="flex space-x-2">
+                            <label class="flex-1 cursor-pointer">
+                                <input type="radio" name="order-type" value="presencial" checked onchange="updateUI()" class="hidden peer">
+                                <div class="p-2 border-2 border-transparent bg-white rounded-lg text-center text-[10px] font-black uppercase peer-checked:border-red-600 peer-checked:text-red-600">No Local</div>
+                            </label>
+                            <label class="flex-1 cursor-pointer">
+                                <input type="radio" name="order-type" value="entrega" onchange="updateUI()" class="hidden peer">
+                                <div class="p-2 border-2 border-transparent bg-white rounded-lg text-center text-[10px] font-black uppercase peer-checked:border-red-600 peer-checked:text-red-600">Entrega</div>
+                            </label>
+                        </div>
+                        
+                        <div id="area-presencial" class="flex space-x-2">
+                            <input type="number" id="mesa" placeholder="Mesa" class="w-20 p-3 bg-white border rounded-xl font-bold text-center">
+                            <select id="comer-levar" class="flex-1 p-3 bg-white border rounded-xl text-[10px] font-black uppercase">
+                                <option value="Para Comer Agora">Para Comer Agora</option>
+                                <option value="Embalagem Viagem">Para Viagem</option>
+                            </select>
+                        </div>
+                        
+                        <div id="area-entrega" class="hidden">
+                            <input type="text" id="endereco" placeholder="ENDEREÇO COMPLETO" class="w-full p-3 bg-white border rounded-xl text-[10px] font-black uppercase">
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="flex justify-between items-center py-4 border-t-2 border-dashed border-gray-100">
+            <div class="py-4 border-t-2 border-dashed border-gray-100 flex justify-between items-center">
                 <span class="font-black uppercase text-gray-400 text-xs">Total</span>
                 <span id="res-total" class="font-black text-2xl text-red-600">R$ 0,00</span>
             </div>
 
             <div class="grid grid-cols-2 gap-3">
-                <button onclick="executarAcao('imprimir')" class="bg-gray-900 text-white p-4 rounded-xl font-black text-[10px] uppercase flex items-center justify-center space-x-2 active:scale-95 transition-all">
+                <button onclick="executarAcao('imprimir')" class="bg-gray-900 text-white p-4 rounded-xl font-black text-[10px] uppercase flex items-center justify-center space-x-2">
                     <i class="fas fa-print"></i> <span>Imprimir</span>
                 </button>
-                <button onclick="executarAcao('whatsapp')" class="bg-green-600 text-white p-4 rounded-xl font-black text-[10px] uppercase flex items-center justify-center space-x-2 active:scale-95 transition-all">
+                <button onclick="executarAcao('whatsapp')" class="bg-green-600 text-white p-4 rounded-xl font-black text-[10px] uppercase flex items-center justify-center space-x-2">
                     <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
                 </button>
             </div>
@@ -252,80 +246,78 @@
 
     <script>
         const menu = [
-            { id: 'panquecas-salgadas', title: 'Salgadas', img: 'imagem/panqueca_salgada.png', hasSize: true, items: [
+            { id: 'panquecas-salgadas', title: 'Salgadas', img: 'https://images.unsplash.com/photo-1519676867240-f03562e64548?q=80&w=500&auto=format&fit=crop', hasSize: true, items: [
                 { n: 'Frango com Requeijão', d: 'Peito de frango desfiado com requeijão cremoso.', pm: 28, pg: 38 },
                 { n: 'Carne Moída Especial', d: 'Carne bovina temperada, ovo e queijo.', pm: 30, pg: 40 },
                 { n: 'Coração com Queijo', d: 'Coração de frango grelhado e mussarela.', pm: 35, pg: 48 }
             ]},
-            { id: 'panquecas-doces', title: 'Doces', img: 'imagem/panqueca_doce.png', hasSize: true, items: [
+            { id: 'panquecas-doces', title: 'Doces', img: 'https://images.unsplash.com/photo-1565299507177-b0ac66763828?q=80&w=500&auto=format&fit=crop', hasSize: true, items: [
                 { n: 'Nutella com Morango', d: 'Genuína Nutella com morangos frescos.', pm: 32, pg: 45 },
                 { n: 'Doce de Leite com Coco', d: 'Doce de leite artesanal e coco ralado.', pm: 25, pg: 35 }
             ]},
-            { id: 'porcoes', title: 'Porções', img: 'imagem/porcoes.png', hasSize: true, items: [
+            { id: 'porcoes', title: 'Porções', img: 'https://images.unsplash.com/photo-1567620905732-2d1ec7bb7445?q=80&w=500&auto=format&fit=crop', hasSize: true, items: [
                 { n: 'Frango Frito Crocante', d: 'Pedaços suculentos empanados na hora.', pm: 35, pg: 55 },
                 { n: 'Batata Frita Tradicional', d: 'Porção crocante de batata palito.', pm: 20, pg: 35 }
             ]},
-            { id: 'pastéis', title: 'Pastéis', img: 'imagem/pasteis.png', items: [
+            { id: 'pastéis', title: 'Pastéis', img: 'https://images.unsplash.com/photo-1626379616459-b2ee19a27430?q=80&w=500&auto=format&fit=crop', items: [
                 { n: 'Pastel de Carne', d: 'Recheio tradicional de carne moída.', p: 12 },
                 { n: 'Pastel de Queijo', d: 'Mussarela derretida em abundância.', p: 10 }
             ]},
-            { id: 'paoquecao', title: 'Pãoquecão', img: 'imagem/paoquecao.png', items: [
+            { id: 'paoquecao', title: 'Pãoquecão', img: 'https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=500&auto=format&fit=crop', items: [
                 { n: 'Pãoquecão da Casa', d: 'A receita secreta em formato de pão.', p: 25 }
             ]},
-            { id: 'lasanhas', title: 'Lasanhas', img: 'imagem/lasanhas.png', items: [
+            { id: 'lasanhas', title: 'Lasanhas', img: 'https://images.unsplash.com/photo-1551183053-bf91a1d81141?q=80&w=500&auto=format&fit=crop', items: [
                 { n: 'Lasanha à Bolonhesa', d: 'Massa fresca, molho e queijo.', p: 35 }
             ]},
-            { id: 'gelados', title: 'Gelados', img: 'imagem/gelados.png', items: [
+            { id: 'gelados', title: 'Gelados', img: 'https://images.unsplash.com/photo-1505394033343-43165b382d70?q=80&w=500&auto=format&fit=crop', items: [
                 { n: 'Açaí Especial 500ml', d: 'Açaí completo com 3 adicionais.', p: 25 }
             ]},
-            { id: 'bebidas', title: 'Bebidas', img: 'imagem/bebidas.png', items: [
+            { id: 'bebidas', title: 'Bebidas', img: 'https://images.unsplash.com/photo-1437419764061-2473afe69fc2?q=80&w=500&auto=format&fit=crop', items: [
                 { n: 'Coca-Cola 2 Litros', d: 'Garrafa PET bem gelada.', p: 15 },
                 { n: 'Refrigerante Lata', d: 'Lata 350ml variados.', p: 6 }
             ]}
         ];
 
         let cart = [];
-        const urlParams = new URLSearchParams(window.location.search);
-        // Agora o padrão é cliente. Só entra em admin se tiver ?modo=admin
-        const isAdmin = urlParams.get('modo') === 'admin';
+        const isAdmin = new URLSearchParams(window.location.search).get('modo') === 'admin';
 
         function render() {
-            if (isAdmin) {
-                document.getElementById('main-body').classList.add('admin-mode');
-            }
+            if (isAdmin) document.body.classList.add('admin-mode');
 
             const container = document.getElementById('menu-container');
             container.innerHTML = menu.map(c => `
-                <section id="${c.id}" class="mb-12 flex flex-col">
+                <section id="${c.id}" class="mb-8">
                     <div class="category-header" style="background-image: url('${c.img}')">
                         <h2 class="category-title">${c.title}</h2>
                     </div>
-                    <div class="flex flex-col space-y-5">
+                    <div class="space-y-4">
                         ${c.items.map((it, i) => `
                             <div class="product-card">
-                                <h3 class="font-black text-gray-800 uppercase text-base">${it.n}</h3>
-                                <p class="text-[11px] text-gray-400 font-bold mb-4">${it.d}</p>
+                                <h3 class="font-black text-gray-800 uppercase text-sm">${it.n}</h3>
+                                <p class="text-[10px] text-gray-400 font-bold mb-3">${it.d}</p>
                                 
                                 ${c.hasSize ? `
-                                    <div class="flex space-x-3 mb-4">
-                                        <div class="flex-1 flex flex-col items-center bg-gray-50 p-3 rounded-2xl border border-gray-100">
-                                            <span class="text-[8px] font-black text-gray-300 uppercase">Média</span>
-                                            <span class="text-sm font-black text-red-600">R$${it.pm}</span>
+                                    <div class="flex items-center justify-between mb-3">
+                                        <div class="flex space-x-2">
+                                            <div class="bg-gray-50 px-3 py-1 rounded-lg text-center">
+                                                <div class="text-[7px] font-black text-gray-400 uppercase">M</div>
+                                                <div class="text-xs font-black text-red-600">R$${it.pm}</div>
+                                            </div>
+                                            <div class="bg-gray-50 px-3 py-1 rounded-lg text-center">
+                                                <div class="text-[7px] font-black text-gray-400 uppercase">G</div>
+                                                <div class="text-xs font-black text-red-600">R$${it.pg}</div>
+                                            </div>
                                         </div>
-                                        <div class="flex-1 flex flex-col items-center bg-gray-50 p-3 rounded-2xl border border-gray-100">
-                                            <span class="text-[8px] font-black text-gray-300 uppercase">Grande</span>
-                                            <span class="text-sm font-black text-red-600">R$${it.pg}</span>
-                                        </div>
-                                        <div class="admin-only flex items-center space-x-2 pl-3">
-                                            <label class="flex cursor-pointer"><input type="radio" name="sz-${c.id}-${i}" value="M" checked class="hidden peer"><div class="peer-checked:bg-red-600 peer-checked:text-white border-2 border-gray-100 px-3 py-2 rounded-xl text-xs font-black">M</div></label>
-                                            <label class="flex cursor-pointer"><input type="radio" name="sz-${c.id}-${i}" value="G" class="hidden peer"><div class="peer-checked:bg-red-600 peer-checked:text-white border-2 border-gray-100 px-3 py-2 rounded-xl text-xs font-black">G</div></label>
+                                        <div class="admin-only flex space-x-1">
+                                            <label><input type="radio" name="sz-${c.id}-${i}" value="M" checked class="hidden peer"><div class="peer-checked:bg-red-600 peer-checked:text-white border px-3 py-1 rounded-lg text-[10px] font-black cursor-pointer">M</div></label>
+                                            <label><input type="radio" name="sz-${c.id}-${i}" value="G" class="hidden peer"><div class="peer-checked:bg-red-600 peer-checked:text-white border px-3 py-1 rounded-lg text-[10px] font-black cursor-pointer">G</div></label>
                                         </div>
                                     </div>
-                                ` : `<div class="font-black text-red-600 text-lg mb-4">R$ ${it.p.toFixed(2)}</div>`}
+                                ` : `<div class="font-black text-red-600 text-base mb-3">R$ ${it.p.toFixed(2)}</div>`}
 
-                                <div class="admin-only flex flex-col border-t pt-4">
-                                    <input type="text" id="obs-${c.id}-${i}" placeholder="Observações..." class="bg-gray-50 p-3 rounded-xl text-xs font-bold outline-none mb-3 border border-transparent focus:border-red-200 uppercase">
-                                    <button onclick="add('${c.id}', ${menu.find(x => x.id === c.id).items.indexOf(it)})" class="bg-gray-900 text-white py-4 rounded-2xl text-xs font-black uppercase tracking-widest active:bg-red-600 transition-colors">Lançar Item</button>
+                                <div class="admin-only flex flex-col pt-3 border-t">
+                                    <input type="text" id="obs-${c.id}-${i}" placeholder="OBSERVAÇÕES..." class="bg-gray-50 p-2 rounded-lg text-[10px] font-bold outline-none mb-2 border border-transparent focus:border-red-200 uppercase">
+                                    <button onclick="add('${c.id}', ${i})" class="bg-gray-900 text-white py-3 rounded-xl text-[10px] font-black uppercase tracking-widest active:bg-red-600">Lançar Item</button>
                                 </div>
                             </div>
                         `).join('')}
@@ -337,13 +329,13 @@
         function add(cid, idx) {
             const cat = menu.find(c => c.id === cid);
             const it = cat.items[idx];
-            let size = 'U';
-            let price = it.p || 0;
+            let size = 'U', price = it.p || 0;
+            
             if(cat.hasSize) {
-                const checked = document.querySelector(`input[name="sz-${cid}-${idx}"]:checked`);
-                size = checked ? checked.value : 'M';
+                size = document.querySelector(`input[name="sz-${cid}-${idx}"]:checked`).value;
                 price = size === 'M' ? it.pm : it.pg;
             }
+            
             const obsInput = document.getElementById(`obs-${cid}-${idx}`);
             cart.push({ n: it.n, sz: size, p: price, obs: obsInput.value.toUpperCase(), id: Date.now() });
             obsInput.value = "";
@@ -360,18 +352,17 @@
 
         function renderCart() {
             const list = document.getElementById('cart-items');
-            if(cart.length === 0) {
-                list.innerHTML = `<p class="text-center py-4 text-gray-300 italic font-bold">Nenhum item lançado</p>`;
-                return;
-            }
+            if(!cart.length) { list.innerHTML = `<p class="text-center py-4 text-gray-300 italic font-bold">Vazio</p>`; return; }
             list.innerHTML = cart.map(i => `
                 <div class="flex justify-between items-center bg-gray-50 p-3 rounded-xl border border-gray-100">
                     <div class="flex flex-col">
                         <span class="text-[10px] font-black uppercase">${i.n} (${i.sz})</span>
-                        ${i.obs ? `<span class="text-[8px] text-gray-500 italic">OBS: ${i.obs}</span>` : ''}
-                        <span class="text-[10px] font-black text-red-600">R$ ${i.p.toFixed(2)}</span>
+                        ${i.obs ? `<span class="text-[8px] text-gray-500 italic">>> ${i.obs}</span>` : ''}
                     </div>
-                    <button onclick="rem(${i.id})" class="text-red-500 p-2"><i class="fas fa-trash-alt text-xs"></i></button>
+                    <div class="flex items-center space-x-3">
+                        <span class="text-[10px] font-black text-red-600">R$ ${i.p.toFixed(2)}</span>
+                        <button onclick="rem(${i.id})" class="text-red-500"><i class="fas fa-trash"></i></button>
+                    </div>
                 </div>
             `).join('');
         }
@@ -385,95 +376,53 @@
         }
 
         function executarAcao(tipo) {
-            const nomeInput = document.getElementById('client-name');
-            const nome = nomeInput.value.trim();
-            if(!cart.length) { alert("Lance itens primeiro!"); return; }
-            if(!nome) { alert("Informe o Nome do Cliente!"); nomeInput.focus(); return; }
+            const nome = document.getElementById('client-name').value.trim();
+            if(!cart.length || !nome) return alert("Verifique itens e nome!");
 
             const type = document.querySelector('input[name="order-type"]:checked').value;
-            const mesaInput = document.getElementById('mesa');
-            const mesa = mesaInput.value;
-            const enderecoInput = document.getElementById('endereco');
-            const endereco = enderecoInput.value.trim();
-
-            if(type === 'presencial' && !mesa) { alert("Informe a Mesa!"); mesaInput.focus(); return; }
-            if(type === 'entrega' && !endereco) { alert("Informe o Endereço!"); enderecoInput.focus(); return; }
+            const mesa = document.getElementById('mesa').value;
+            const endereco = document.getElementById('endereco').value.trim();
+            const modoConsumo = document.getElementById('comer-levar').value;
 
             if(tipo === 'imprimir') {
-                gerarCupomTermico(nome, type, mesa, endereco);
+                const area = document.getElementById('print-area');
+                area.innerHTML = `
+                    <div class="thermal-header">O PANQUECÃO</div>
+                    <div class="thermal-client">${nome.toUpperCase()}</div>
+                    <div style="font-size: 8pt; margin-bottom: 3mm;">
+                        DATA: ${new Date().toLocaleString('pt-BR')}<br>
+                        TIPO: ${type === 'presencial' ? `MESA ${mesa} (${modoConsumo.toUpperCase()})` : `ENTREGA`}
+                        ${type === 'entrega' ? `<br>END: ${endereco.toUpperCase()}` : ''}
+                    </div>
+                    <div style="font-weight: bold; border-bottom: 1px solid black;">ITENS:</div>
+                    ${cart.map(i => `
+                        <div class="thermal-item">
+                            1x ${i.n.toUpperCase()} (${i.sz}) <span style="float:right">R$ ${i.p.toFixed(2)}</span>
+                            ${i.obs ? `<div style="font-size: 8pt; font-style: italic;">>> ${i.obs}</div>` : ''}
+                        </div>
+                    `).join('')}
+                    <div class="thermal-total">TOTAL R$ ${cart.reduce((a, b) => a + b.p, 0).toFixed(2)}</div>
+                    <div style="text-align:center; margin-top: 5mm; font-size: 8pt;">- Uso Interno -</div>
+                `;
+                window.print();
+                limpar();
             } else {
-                gerarWhatsApp(nome, type, mesa, endereco);
+                let msg = `*PEDIDO O PANQUECÃO*\n\n*Cliente:* ${nome.toUpperCase()}\n*Tipo:* ${type === 'presencial' ? `Mesa ${mesa} (${modoConsumo})` : 'Entrega'}\n`;
+                if(type === 'entrega') msg += `*End:* ${endereco}\n`;
+                msg += `\n*ITENS:*\n` + cart.map(i => `• 1x ${i.n} (${i.sz}) - R$ ${i.p.toFixed(2)}${i.obs ? `\n  _Obs: ${i.obs}_` : ''}`).join('\n');
+                msg += `\n\n*TOTAL: R$ ${cart.reduce((a, b) => a + b.p, 0).toFixed(2)}*`;
+                window.open(`https://api.whatsapp.com/send?phone=5551997383849&text=${encodeURIComponent(msg)}`, '_blank');
+                limpar();
             }
         }
 
-        function gerarCupomTermico(nome, type, mesa, endereco) {
-            const modoConsumo = document.getElementById('comer-levar').value;
-            const total = cart.reduce((a, b) => a + b.p, 0).toFixed(2);
-            const dataHora = new Date().toLocaleString('pt-BR');
-            
-            let html = `
-                <div class="thermal-header">O PANQUECÃO</div>
-                <div class="thermal-client">${nome}</div>
-                <div class="thermal-info">
-                    <b>PEDIDO:</b> ${dataHora}<br>
-                    <b>TIPO:</b> ${type === 'presencial' ? `MESA ${mesa} (${modoConsumo.toUpperCase()})` : `ENTREGA`}
-                    ${type === 'entrega' ? `<br><b>END:</b> ${endereco.toUpperCase()}` : ''}
-                </div>
-                <div style="font-weight: bold; margin-bottom: 2mm;">ITENS:</div>
-            `;
-            
-            cart.forEach(i => {
-                html += `
-                    <div class="thermal-item">
-                        <div class="thermal-item-title">1x ${i.n.toUpperCase()} (${i.sz})</div>
-                        <div style="text-align: right;">R$ ${i.p.toFixed(2)}</div>
-                        ${i.obs ? `<div class="thermal-item-obs">>> ${i.obs}</div>` : ''}
-                    </div>
-                `;
-            });
-            
-            html += `<div class="thermal-total">TOTAL R$ ${total}</div>`;
-            html += `<div style="text-align:center; margin-top: 10mm; font-size: 9pt;">*** CUPOM INTERNO ***</div>`;
-            
-            const area = document.getElementById('print-area');
-            area.innerHTML = html;
-            
-            setTimeout(() => {
-                window.print();
-                limparCarrinho();
-            }, 250);
-        }
-
-        function gerarWhatsApp(nome, type, mesa, endereco) {
-            const modoConsumo = document.getElementById('comer-levar').value;
-            let msg = `*PEDIDO INTERNO - O PANQUECÃO*\n\n`;
-            msg += `*Cliente:* ${nome.toUpperCase()}\n`;
-            msg += `*Tipo:* ${type === 'presencial' ? `No Local (Mesa ${mesa})` : 'Entrega'}\n`;
-            if(type === 'presencial') msg += `*Consumo:* ${modoConsumo}\n`;
-            if(type === 'entrega') msg += `*Endereço:* ${endereco.toUpperCase()}\n`;
-            msg += `\n*ITENS:*\n`;
-            
-            cart.forEach(i => {
-                msg += `• 1x ${i.n} (${i.sz}) - R$ ${i.p.toFixed(2)}\n`;
-                if(i.obs) msg += `  _Obs: ${i.obs}_\n`;
-            });
-            
-            msg += `\n*TOTAL: R$ ${cart.reduce((a, b) => a + b.p, 0).toFixed(2)}*`;
-            
-            const fone = "5551997383849";
-            window.open(`https://api.whatsapp.com/send?phone=${fone}&text=${encodeURIComponent(msg)}`, '_blank');
-            limparCarrinho();
-        }
-
-        function limparCarrinho() {
+        function limpar() {
             cart = [];
             document.getElementById('client-name').value = "";
             document.getElementById('mesa').value = "";
             document.getElementById('endereco').value = "";
             calc();
-            if(!document.getElementById('cart-modal').classList.contains('hidden')) {
-                toggleCart();
-            }
+            toggleCart();
         }
 
         window.onload = render;
