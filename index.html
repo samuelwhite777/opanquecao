@@ -1,1 +1,397 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>O Panquecão - Cardápio Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap');
+        
+        body { 
+            font-family: 'Montserrat', sans-serif; 
+            background-color: #f3f4f6; 
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            margin: 0;
+        }
 
+        .brand-font { font-weight: 900; letter-spacing: -1px; }
+        
+        /* Containers Flexbox Base */
+        .flex-container { display: flex; flex-direction: column; }
+
+        /* Cabeçalho de Categoria com Imagem Local */
+        .category-header {
+            height: 160px; 
+            background-size: cover; 
+            background-position: center;
+            display: flex; 
+            align-items: flex-end; 
+            padding: 20px;
+            position: relative; 
+            border-radius: 20px; 
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .category-header::after {
+            content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+            background: linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 100%);
+            border-radius: 20px;
+        }
+
+        .category-title { position: relative; z-index: 1; color: white; font-size: 1.25rem; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+
+        /* Navegação Fixa (Abas) */
+        .sticky-tabs { 
+            position: sticky; 
+            top: 0; 
+            z-index: 40; 
+            background: #ffffff; 
+            border-bottom: 3px solid #ef4444;
+            display: flex;
+            overflow-x: auto;
+            gap: 8px;
+            padding: 12px;
+        }
+
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+        /* Estilização de Cartões - Mobile First */
+        .product-card {
+            display: flex;
+            flex-direction: column;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1.25rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s;
+        }
+
+        /* Restrições do Modo Cliente */
+        .client-only .admin-feature { display: none !important; }
+
+        /* Impressão de Alta Acessibilidade */
+        @media print {
+            body * { visibility: hidden; }
+            #print-area, #print-area * { visibility: visible; }
+            #print-area {
+                position: absolute; left: 0; top: 0; width: 100%;
+                display: flex; flex-direction: column;
+                padding: 10mm; font-family: 'Arial Black', sans-serif; color: black; background: white;
+            }
+            .print-client-name { font-size: 36pt !important; font-weight: 900; border: 6px solid black; padding: 6mm; text-align: center; margin-bottom: 8mm; text-transform: uppercase; }
+            .print-item-title { font-size: 28pt !important; font-weight: 900; line-height: 1.1; margin-top: 4mm; }
+            .print-item-obs { font-size: 20pt !important; background: #ddd; padding: 3mm; margin-top: 2mm; font-style: italic; }
+            .print-total { font-size: 44pt !important; font-weight: 900; border-top: 10px solid black; margin-top: 10mm; padding-top: 5mm; text-align: right; }
+        }
+        #print-area { display: none; }
+    </style>
+</head>
+<body class="pb-28" id="body-context">
+
+    <!-- Header Principal -->
+    <header class="bg-white p-6 shadow-sm border-b-4 border-red-600 flex flex-col items-center">
+        <h1 class="text-3xl brand-font text-red-600 italic uppercase">O Panquecão</h1>
+        <p id="sub-header-text" class="text-[10px] font-black tracking-[0.25em] text-gray-400 uppercase">Sistema Profissional de Pedidos</p>
+    </header>
+
+    <!-- Navegação por Categorias -->
+    <nav class="sticky-tabs no-scrollbar">
+        <a href="#panquecas-salgadas" class="flex-shrink-0 px-5 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Salgadas</a>
+        <a href="#panquecas-doces" class="flex-shrink-0 px-5 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Doces</a>
+        <a href="#porcoes" class="flex-shrink-0 px-5 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Porções</a>
+        <a href="#pastéis" class="flex-shrink-0 px-5 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Pastéis</a>
+        <a href="#paoquecao" class="flex-shrink-0 px-5 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Pãoquecão</a>
+        <a href="#lasanhas" class="flex-shrink-0 px-5 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Lasanhas</a>
+        <a href="#gelados" class="flex-shrink-0 px-5 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Gelados</a>
+        <a href="#bebidas" class="flex-shrink-0 px-5 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Bebidas</a>
+    </nav>
+
+    <!-- Container do Cardápio -->
+    <main class="max-w-xl mx-auto p-4 w-full flex flex-col" id="menu-container"></main>
+
+    <!-- Barra de Resumo (Admin) -->
+    <div class="admin-feature">
+        <div class="fixed bottom-6 left-0 right-0 px-4 flex justify-center z-50">
+            <button onclick="toggleCart()" class="w-full max-w-md bg-red-600 text-white p-5 rounded-2xl shadow-2xl flex justify-between items-center transition-transform active:scale-95">
+                <div class="flex items-center space-x-4">
+                    <div class="relative flex">
+                        <i class="fas fa-shopping-basket text-2xl"></i>
+                        <span id="cart-count" class="absolute -top-3 -right-3 bg-yellow-400 text-red-900 text-[11px] font-black w-6 h-6 flex items-center justify-center rounded-full border-2 border-red-600">0</span>
+                    </div>
+                    <span class="font-black text-sm uppercase">Finalizar Pedido</span>
+                </div>
+                <span id="cart-total-badge" class="font-black text-xl">R$ 0,00</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal de Checkout -->
+    <div id="cart-modal" class="admin-feature fixed inset-0 bg-black/70 z-[100] hidden flex flex-col justify-end sm:justify-center items-center backdrop-blur-sm">
+        <div class="bg-white w-full max-w-lg rounded-t-[2.5rem] sm:rounded-3xl flex flex-col max-h-[95vh] p-8 shadow-2xl">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-black uppercase italic text-gray-800">Seu Pedido</h2>
+                <button onclick="toggleCart()" class="text-gray-300 hover:text-red-600 transition-colors"><i class="fas fa-times-circle text-3xl"></i></button>
+            </div>
+
+            <div class="flex flex-col mb-5">
+                <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1 mb-2">Identificação do Cliente</label>
+                <input type="text" id="client-name" placeholder="NOME DO CLIENTE" class="w-full p-4 bg-gray-50 border-2 border-gray-100 focus:border-red-600 rounded-2xl font-black uppercase outline-none transition-all">
+            </div>
+
+            <!-- Lista de Itens no Carrinho -->
+            <div id="cart-items" class="flex flex-col space-y-3 overflow-y-auto mb-6 no-scrollbar min-h-[100px]"></div>
+            
+            <!-- Opções de Entrega/Local -->
+            <div class="bg-gray-50 p-5 rounded-2xl space-y-4 mb-6 border border-gray-100">
+                <div class="flex space-x-2">
+                    <label class="flex-1 cursor-pointer">
+                        <input type="radio" name="order-type" value="presencial" checked onchange="updateUI()" class="hidden peer">
+                        <div class="p-3 border-2 border-transparent bg-white rounded-xl text-center text-[10px] font-black uppercase peer-checked:border-red-600 peer-checked:bg-red-50 peer-checked:text-red-600 transition-all">No Local</div>
+                    </label>
+                    <label class="flex-1 cursor-pointer">
+                        <input type="radio" name="order-type" value="entrega" onchange="updateUI()" class="hidden peer">
+                        <div class="p-3 border-2 border-transparent bg-white rounded-xl text-center text-[10px] font-black uppercase peer-checked:border-red-600 peer-checked:bg-red-50 peer-checked:text-red-600 transition-all">Entrega</div>
+                    </label>
+                    <label class="flex-1 cursor-pointer">
+                        <input type="radio" name="order-type" value="retirada" onchange="updateUI()" class="hidden peer">
+                        <div class="p-3 border-2 border-transparent bg-white rounded-xl text-center text-[10px] font-black uppercase peer-checked:border-red-600 peer-checked:bg-red-50 peer-checked:text-red-600 transition-all">Retirada</div>
+                    </label>
+                </div>
+                
+                <div id="area-presencial" class="flex space-x-3">
+                    <input type="number" id="mesa" placeholder="Mesa" class="w-24 p-4 bg-white border rounded-2xl text-lg font-black text-center outline-none">
+                    <select id="comer-levar" class="flex-1 p-4 bg-white border rounded-2xl text-sm font-bold outline-none">
+                        <option value="Para Comer Agora">Para Comer Agora</option>
+                        <option value="Embalagem Viagem">Embalagem Viagem</option>
+                    </select>
+                </div>
+                
+                <div id="area-entrega" class="hidden flex">
+                    <input type="text" id="endereco" placeholder="Endereço Completo para Entrega" class="w-full p-4 bg-white border rounded-2xl text-sm font-bold outline-none">
+                </div>
+            </div>
+
+            <div class="flex flex-col mb-6">
+                <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest ml-1 mb-2">Forma de Pagamento</label>
+                <select id="pagamento" class="w-full p-4 bg-gray-50 border rounded-2xl font-black text-gray-700">
+                    <option value="Pix">PIX (Chave Celular)</option>
+                    <option value="Cartão">CARTÃO (Débito/Crédito)</option>
+                    <option value="Dinheiro">DINHEIRO (Espécie)</option>
+                </select>
+            </div>
+
+            <div class="flex justify-between items-center py-5 border-t-2 border-dashed border-gray-100">
+                <span class="font-black uppercase text-gray-400 tracking-wider">Total Geral</span>
+                <span id="res-total" class="font-black text-3xl text-red-600">R$ 0,00</span>
+            </div>
+
+            <div class="flex space-x-3 mt-2">
+                <button onclick="imprimirPedido()" class="flex-1 bg-gray-900 text-white p-5 rounded-2xl font-black text-xs uppercase flex items-center justify-center space-x-2 active:scale-95 transition-all shadow-lg">
+                    <i class="fas fa-print"></i> <span>Imprimir</span>
+                </button>
+                <button onclick="enviarPedido()" class="flex-1 bg-green-600 text-white p-5 rounded-2xl font-black text-xs uppercase flex items-center justify-center space-x-2 active:scale-95 transition-all shadow-lg">
+                    <i class="fab fa-whatsapp"></i> <span>Enviar WhatsApp</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Área de Impressão Oculta -->
+    <div id="print-area"></div>
+
+    <script>
+        const menu = [
+            { id: 'panquecas-salgadas', title: 'Salgadas', img: 'imagem/panqueca_salgada.png', hasSize: true, items: [
+                { n: 'Frango com Requeijão', d: 'Peito de frango desfiado com requeijão cremoso.', pm: 28, pg: 38 },
+                { n: 'Carne Moída Especial', d: 'Carne bovina temperada, ovo e queijo.', pm: 30, pg: 40 },
+                { n: 'Coração com Queijo', d: 'Coração de frango grelhado e mussarela.', pm: 35, pg: 48 }
+            ]},
+            { id: 'panquecas-doces', title: 'Doces', img: 'imagem/panqueca_doce.png', hasSize: true, items: [
+                { n: 'Nutella com Morango', d: 'Genuína Nutella com morangos frescos.', pm: 32, pg: 45 },
+                { n: 'Doce de Leite com Coco', d: 'Doce de leite artesanal e coco ralado.', pm: 25, pg: 35 }
+            ]},
+            { id: 'porcoes', title: 'Porções', img: 'imagem/porcoes.png', hasSize: true, items: [
+                { n: 'Frango Frito Crocante', d: 'Pedaços suculentos empanados na hora.', pm: 35, pg: 55 },
+                { n: 'Batata Frita Tradicional', d: 'Porção crocante de batata palito.', pm: 20, pg: 35 }
+            ]},
+            { id: 'pastéis', title: 'Pastéis', img: 'imagem/pasteis.png', items: [
+                { n: 'Pastel de Carne', d: 'Recheio tradicional de carne moída.', p: 12 },
+                { n: 'Pastel de Queijo', d: 'Mussarela derretida em abundância.', p: 10 }
+            ]},
+            { id: 'paoquecao', title: 'Pãoquecão', img: 'imagem/paoquecao.png', items: [
+                { n: 'Pãoquecão da Casa', d: 'A receita secreta em formato de pão.', p: 25 }
+            ]},
+            { id: 'lasanhas', title: 'Lasanhas', img: 'imagem/lasanhas.png', items: [
+                { n: 'Lasanha à Bolonhesa', d: 'Massa fresca, molho e queijo.', p: 35 }
+            ]},
+            { id: 'gelados', title: 'Gelados', img: 'imagem/gelados.png', items: [
+                { n: 'Açaí Especial 500ml', d: 'Açaí completo com 3 adicionais.', p: 25 }
+            ]},
+            { id: 'bebidas', title: 'Bebidas', img: 'imagem/bebidas.png', items: [
+                { n: 'Coca-Cola 2 Litros', d: 'Garrafa PET bem gelada.', p: 15 },
+                { n: 'Refrigerante Lata', d: 'Lata 350ml variados.', p: 6 },
+                { n: 'Água Mineral', d: 'Garrafa 500ml com ou sem gás.', p: 4 }
+            ]}
+        ];
+
+        let cart = [];
+        const isClientMode = new URLSearchParams(window.location.search).get('modo') === 'cliente';
+
+        function render() {
+            const container = document.getElementById('menu-container');
+            if (isClientMode) {
+                document.getElementById('body-context').classList.add('client-only');
+                document.getElementById('sub-header-text').innerText = "CARDÁPIO OFICIAL";
+            }
+
+            container.innerHTML = menu.map(c => `
+                <section id="${c.id}" class="mb-12 flex flex-col">
+                    <div class="category-header" style="background-image: url('${c.img}')">
+                        <h2 class="category-title">${c.title}</h2>
+                    </div>
+                    <div class="flex flex-col space-y-5">
+                        ${c.items.map((it, i) => `
+                            <div class="product-card">
+                                <h3 class="font-black text-gray-800 uppercase text-base">${it.n}</h3>
+                                <p class="text-[11px] text-gray-400 font-bold mb-4">${it.d}</p>
+                                
+                                ${c.hasSize ? `
+                                    <div class="flex space-x-3 mb-4">
+                                        <div class="flex-1 flex flex-col items-center bg-gray-50 p-3 rounded-2xl border border-gray-100">
+                                            <span class="text-[8px] font-black text-gray-300 uppercase">Média</span>
+                                            <span class="text-sm font-black text-red-600">R$${it.pm}</span>
+                                        </div>
+                                        <div class="flex-1 flex flex-col items-center bg-gray-50 p-3 rounded-2xl border border-gray-100">
+                                            <span class="text-[8px] font-black text-gray-300 uppercase">Grande</span>
+                                            <span class="text-sm font-black text-red-600">R$${it.pg}</span>
+                                        </div>
+                                        <div class="admin-feature flex items-center space-x-2 pl-3">
+                                            <label class="flex cursor-pointer"><input type="radio" name="sz-${c.id}-${i}" value="M" checked class="hidden peer"><div class="peer-checked:bg-red-600 peer-checked:text-white border-2 border-gray-100 px-3 py-2 rounded-xl text-xs font-black">M</div></label>
+                                            <label class="flex cursor-pointer"><input type="radio" name="sz-${c.id}-${i}" value="G" class="hidden peer"><div class="peer-checked:bg-red-600 peer-checked:text-white border-2 border-gray-100 px-3 py-2 rounded-xl text-xs font-black">G</div></label>
+                                        </div>
+                                    </div>
+                                ` : `<div class="font-black text-red-600 text-lg mb-4">R$ ${it.p.toFixed(2)}</div>`}
+
+                                <div class="admin-feature flex flex-col border-t pt-4">
+                                    <input type="text" id="obs-${c.id}-${i}" placeholder="Ex: Sem cebola, bem passado..." class="bg-gray-50 p-3 rounded-xl text-xs font-bold outline-none mb-3 border border-transparent focus:border-red-200">
+                                    <button onclick="add('${c.id}', ${i})" class="bg-gray-900 text-white py-4 rounded-2xl text-xs font-black uppercase tracking-widest active:bg-red-600 transition-colors">Adicionar ao Pedido</button>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </section>
+            `).join('');
+        }
+
+        function add(cid, idx) {
+            const cat = menu.find(c => c.id === cid);
+            const it = cat.items[idx];
+            let size = 'U';
+            let price = it.p || 0;
+            if(cat.hasSize) {
+                size = document.querySelector(`input[name="sz-${cid}-${idx}"]:checked`).value;
+                price = size === 'M' ? it.pm : it.pg;
+            }
+            const obsInput = document.getElementById(`obs-${cid}-${idx}`);
+            cart.push({ n: it.n, sz: size, p: price, obs: obsInput.value, id: Date.now() });
+            obsInput.value = ""; // Limpa campo após adicionar
+            calc();
+        }
+
+        function calc() {
+            const total = cart.reduce((a, b) => a + b.p, 0);
+            document.getElementById('cart-count').innerText = cart.length;
+            document.getElementById('cart-total-badge').innerText = `R$ ${total.toFixed(2)}`;
+            document.getElementById('res-total').innerText = `R$ ${total.toFixed(2)}`;
+            renderCart();
+        }
+
+        function renderCart() {
+            const list = document.getElementById('cart-items');
+            if (cart.length === 0) {
+                list.innerHTML = `<div class="flex flex-col items-center py-8 text-gray-300 font-bold italic uppercase text-sm"><i class="fas fa-ghost text-4xl mb-2"></i> Carrinho Vazio</div>`;
+                return;
+            }
+            list.innerHTML = cart.map(i => `
+                <div class="flex justify-between items-center bg-gray-50 p-4 rounded-2xl border border-gray-100">
+                    <div class="flex flex-col">
+                        <span class="text-xs font-black uppercase text-gray-700">${i.n} (${i.sz})</span>
+                        <span class="text-[10px] font-black text-red-600">R$ ${i.p.toFixed(2)}</span>
+                    </div>
+                    <button onclick="rem(${i.id})" class="text-gray-300 hover:text-red-500 transition-colors p-2"><i class="fas fa-trash-alt"></i></button>
+                </div>
+            `).join('');
+        }
+
+        function rem(id) { cart = cart.filter(i => i.id !== id); calc(); }
+        function toggleCart() { document.getElementById('cart-modal').classList.toggle('hidden'); }
+        function updateUI() {
+            const type = document.querySelector('input[name="order-type"]:checked').value;
+            document.getElementById('area-presencial').classList.toggle('hidden', type !== 'presencial');
+            document.getElementById('area-entrega').classList.toggle('hidden', type !== 'entrega');
+        }
+
+        function imprimirPedido() {
+            const nome = document.getElementById('client-name').value;
+            if(!cart.length || !nome) { alert("Informe o nome do cliente e adicione itens."); return; }
+            
+            const type = document.querySelector('input[name="order-type"]:checked').value;
+            const mesaNum = document.getElementById('mesa').value || 'S/N';
+            const modoConsumo = document.getElementById('comer-levar').value;
+            
+            let html = `
+                <div class="print-header">
+                    <b style="font-size: 32pt;">O PANQUECÃO</b><br>
+                    <span style="font-size: 16pt;">PEDIDO: ${new Date().toLocaleTimeString()}</span>
+                </div>
+                <div class="print-client-name">${nome.toUpperCase()}</div>
+                <div style="font-size: 26pt; font-weight: 900; background: black; color: white; text-align: center; padding: 10px; margin-bottom: 8mm;">
+                    ${type === 'presencial' ? `MESA: ${mesaNum} | ${modoConsumo.toUpperCase()}` : type.toUpperCase()}
+                </div>
+            `;
+            
+            cart.forEach(i => {
+                html += `<div style="margin-bottom: 8mm; border-bottom: 3px solid black; padding-bottom: 3mm;">
+                    <div class="print-item-title">1x ${i.n.toUpperCase()} (${i.sz})</div>
+                    ${i.obs ? `<div class="print-item-obs">NOTAS: ${i.obs.toUpperCase()}</div>` : ''}
+                </div>`;
+            });
+            
+            html += `
+                <div class="print-total">TOTAL R$ ${cart.reduce((a, b) => a + b.p, 0).toFixed(2)}</div>
+                <div style="font-size: 22pt; margin-top: 5mm;">PAGAMENTO: <b>${document.getElementById('pagamento').value.toUpperCase()}</b></div>
+            `;
+            
+            document.getElementById('print-area').innerHTML = html;
+            window.print();
+        }
+
+        function enviarPedido() {
+            const nome = document.getElementById('client-name').value;
+            if(!cart.length || !nome) { alert("Informe o nome e adicione itens."); return; }
+            
+            let m = `*O PANQUECÃO - NOVO PEDIDO*\n`;
+            m += `👤 *CLIENTE:* ${nome.toUpperCase()}\n`;
+            m += `------------------------------\n`;
+            cart.forEach(i => {
+                m += `🥞 *${i.n}* (${i.sz})\n`;
+                if(i.obs) m += `   _Nota: ${i.obs}_\n`;
+                m += `   R$ ${i.p.toFixed(2)}\n\n`;
+            });
+            m += `------------------------------\n`;
+            m += `💰 *TOTAL: ${document.getElementById('res-total').innerText}*\n`;
+            m += `💳 *PAGAMENTO:* ${document.getElementById('pagamento').value}\n`;
+            
+            window.open(`https://api.whatsapp.com/send?phone=5551997383849&text=${encodeURIComponent(m)}`, '_blank');
+        }
+
+        window.onload = render;
+    </script>
+</body>
+</html>
