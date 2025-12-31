@@ -77,7 +77,6 @@
             margin-bottom: 1rem;
         }
 
-        /* Lógica Admin/Cliente */
         .admin-only { display: none !important; }
         body.admin-mode .admin-only { display: flex !important; }
         body.admin-mode .admin-block { display: block !important; }
@@ -100,22 +99,25 @@
             z-index: 100;
         }
 
-        /* Estilo para Impressora Térmica */
+        /* Estilo para Impressora Térmica - OTIMIZADO */
         @media print {
             @page { margin: 0; size: 80mm auto; }
             body * { visibility: hidden; }
             #print-area, #print-area * { visibility: visible; }
             #print-area {
-                position: absolute; left: 0; top: 0; width: 80mm;
+                position: absolute; left: 0; top: 0; width: 72mm;
                 padding: 2mm; display: block !important;
-                font-family: 'Arial', sans-serif; /* Mais legível que Courier */
+                background: white !important;
+                font-family: Arial, sans-serif;
                 color: black !important;
             }
-            .print-item-nome { font-size: 18pt; font-weight: 900; line-height: 1.1; }
-            .print-obs { font-size: 14pt; font-weight: bold; border: 1px solid black; padding: 1mm; margin-top: 1mm; }
-            .print-secao-titulo { font-size: 12pt; border-bottom: 2px solid black; margin-top: 4mm; font-weight: bold; }
-            .print-info-grande { font-size: 16pt; font-weight: 900; text-transform: uppercase; }
-            .print-alerta { font-size: 20pt; font-weight: 900; text-align: center; border: 3px solid black; padding: 2mm; margin-top: 5mm; }
+            .thermal-header { font-size: 18pt; font-weight: 900; text-align: center; border-bottom: 2px solid black; margin-bottom: 3mm; padding-bottom: 2mm; }
+            .thermal-client { font-size: 22pt; font-weight: 900; text-align: center; border: 3px solid black; padding: 2mm; margin-bottom: 3mm; text-transform: uppercase; }
+            .thermal-item-nome { font-size: 18pt; font-weight: 900; text-transform: uppercase; line-height: 1.1; }
+            .thermal-item-obs { font-size: 14pt; font-weight: 900; background: #eee; border: 1px solid black; padding: 1mm; margin: 1mm 0 3mm 0; text-transform: uppercase; }
+            .thermal-secao { font-size: 12pt; font-weight: 900; border-bottom: 1px dashed black; margin-top: 4mm; text-transform: uppercase; }
+            .thermal-total { font-size: 24pt; font-weight: 900; text-align: right; margin-top: 4mm; border-top: 2px solid black; }
+            .thermal-alerta { font-size: 20pt; font-weight: 900; text-align: center; border: 4px solid black; padding: 2mm; margin-top: 5mm; background: black; color: white !important; }
         }
         #print-area { display: none; }
     </style>
@@ -239,8 +241,8 @@
                         </div>
                     </div>
 
-                    <!-- SEÇÃO DE PAGAMENTO INTEGRADA -->
-                    <div class="bg-gray-50 p-4 rounded-xl space-y-3">
+                    <!-- SEÇÃO DE PAGAMENTO (MELHORADA: Oculta no local) -->
+                    <div id="area-pagamento-bloco" class="bg-gray-50 p-4 rounded-xl space-y-3">
                         <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Forma de Pagamento</label>
                         <select id="payment-method" onchange="updatePaymentUI()" class="w-full p-3 bg-white border rounded-xl font-bold uppercase text-xs">
                             <option value="">Selecione...</option>
@@ -251,17 +253,8 @@
                         </select>
 
                         <div id="payment-options" class="hidden">
-                            <!-- Troco -->
                             <div id="opt-dinheiro" class="hidden">
                                 <input type="text" id="troco" placeholder="TROCO PARA QUANTO?" class="w-full p-3 bg-white border rounded-xl text-[10px] font-black uppercase">
-                            </div>
-                            <!-- Parcelas -->
-                            <div id="opt-credito" class="hidden">
-                                <select id="parcelas" class="w-full p-3 bg-white border rounded-xl text-[10px] font-black uppercase">
-                                    <option value="A Vista">A Vista</option>
-                                    <option value="2x sem juros">2x sem juros</option>
-                                    <option value="3x sem juros">3x sem juros</option>
-                                </select>
                             </div>
                         </div>
                     </div>
@@ -411,7 +404,8 @@
         }
 
         function calc() {
-            let total = cart.reduce((a, b) => a + b.p, 0);
+            let subtotal = cart.reduce((a, b) => a + b.p, 0);
+            let total = subtotal;
             const type = document.querySelector('input[name="order-type"]:checked').value;
             const taxaEntregaDisplay = document.getElementById('taxa-entrega-display');
             
@@ -428,6 +422,7 @@
             document.getElementById('cart-total-badge').innerText = `R$ ${total.toFixed(2)}`;
             document.getElementById('res-total').innerText = `R$ ${total.toFixed(2)}`;
             renderCart();
+            return { subtotal, total };
         }
 
         function renderCart() {
@@ -454,6 +449,8 @@
             const type = document.querySelector('input[name="order-type"]:checked').value;
             document.getElementById('area-presencial').classList.toggle('hidden', type !== 'presencial');
             document.getElementById('area-entrega').classList.toggle('hidden', type !== 'entrega');
+            // Melhoria: Oculta pagamento se for presencial
+            document.getElementById('area-pagamento-bloco').classList.toggle('hidden', type === 'presencial');
             calc();
         }
 
@@ -461,64 +458,85 @@
             const method = document.getElementById('payment-method').value;
             const container = document.getElementById('payment-options');
             document.getElementById('opt-dinheiro').classList.add('hidden');
-            document.getElementById('opt-credito').classList.add('hidden');
             container.classList.add('hidden');
             if (method === 'DINHEIRO') {
                 container.classList.remove('hidden');
                 document.getElementById('opt-dinheiro').classList.remove('hidden');
-            } else if (method === 'CREDITO') {
+            } else if (method !== "") {
                 container.classList.remove('hidden');
-                document.getElementById('opt-credito').classList.remove('hidden');
             }
         }
 
         function executarAcao(tipo) {
             const nome = document.getElementById('client-name').value.trim();
-            const payMethod = document.getElementById('payment-method').value;
-            if(!cart.length || !nome) return alert("Verifique itens e nome!");
-            if(!payMethod) return alert("Selecione a forma de pagamento!");
-
             const type = document.querySelector('input[name="order-type"]:checked').value;
+            const payMethod = document.getElementById('payment-method').value;
+
+            if(!cart.length || !nome) return alert("Verifique itens e nome!");
+            // Pagamento obrigatório apenas na entrega
+            if(type === 'entrega' && !payMethod) return alert("Selecione a forma de pagamento!");
+
             const mesa = document.getElementById('mesa').value;
             const cidadeSelect = document.getElementById('cidade-entrega');
-            const cidadeText = cidadeSelect.options[cidadeSelect.selectedIndex].text;
+            const cidadeText = cidadeSelect.options[cidadeSelect.selectedIndex]?.text || "";
             const bairroSelect = document.getElementById('bairro-entrega');
-            const bairroText = bairroSelect.options[bairroSelect.selectedIndex].text.split('(')[0].trim();
+            const bairroText = bairroSelect.options[bairroSelect.selectedIndex]?.text.split('(')[0].trim() || "";
             const rua = document.getElementById('rua-entrega').value.trim();
             const num = document.getElementById('numero-entrega').value.trim();
             const ref = document.getElementById('ponto-referencia').value.trim();
             const modoConsumo = document.getElementById('comer-levar').value;
             const taxa = type === 'entrega' ? parseFloat(bairroSelect.value || 0) : 0;
-            const total = cart.reduce((a, b) => a + b.p, 0) + taxa;
+            const subtotal = cart.reduce((a, b) => a + b.p, 0);
+            const total = subtotal + taxa;
 
-            let infoPagamento = payMethod;
+            let infoPagamento = payMethod || "A COMBINAR";
             if (payMethod === 'DINHEIRO') {
                 const troco = document.getElementById('troco').value;
                 infoPagamento += troco ? ` (TROCO PARA: ${troco})` : ` (SEM TROCO)`;
-            } else if (payMethod === 'CREDITO') {
-                infoPagamento += ` (${document.getElementById('parcelas').value})`;
             }
 
             if(tipo === 'imprimir') {
                 const area = document.getElementById('print-area');
+                
+                // Alertas inteligentes
+                const temBebida = cart.some(i => menu.find(c => c.id === 'bebidas').items.some(b => b.n === i.n));
+                const levaMaquininha = (payMethod === 'CREDITO' || payMethod === 'DEBITO') && type === 'entrega';
+
                 area.innerHTML = `
                     <div class="thermal-header">O PANQUECÃO</div>
                     <div class="thermal-client">${nome.toUpperCase()}</div>
-                    <div style="font-size: 8pt; margin-bottom: 3mm;">
-                        DATA: ${new Date().toLocaleString('pt-BR')}<br>
-                        TIPO: ${type === 'presencial' ? `MESA ${mesa} (${modoConsumo.toUpperCase()})` : `ENTREGA`}
-                        ${type === 'entrega' ? `<br>END: ${rua}, ${num} - ${bairroText} (${cidadeText})<br>REF: ${ref}` : ''}
-                        <br>PAG: ${infoPagamento}
-                    </div>
-                    <div style="font-weight: bold; border-bottom: 1px solid black;">ITENS:</div>
+                    
+                    <div style="font-weight: bold; font-size: 14pt; border-bottom: 2px solid black; margin-bottom: 2mm;">ITENS:</div>
                     ${cart.map(i => `
-                        <div class="thermal-item">
-                            1x ${i.n.toUpperCase()} (${i.sz}) <span style="float:right">R$ ${i.p.toFixed(2)}</span>
-                            ${i.obs ? `<div style="font-size: 8pt; font-style: italic;">>> ${i.obs}</div>` : ''}
+                        <div style="margin-bottom: 3mm;">
+                            <div class="thermal-item-nome">1x ${i.n.toUpperCase()} (${i.sz})</div>
+                            ${i.obs ? `<div class="thermal-item-obs">ATENÇÃO: ${i.obs}</div>` : ''}
                         </div>
                     `).join('')}
-                    ${taxa > 0 ? `<div style="font-size: 9pt;">TAXA ENTREGA: <span style="float:right">R$ ${taxa.toFixed(2)}</span></div>` : ''}
-                    <div class="thermal-total">TOTAL R$ ${total.toFixed(2)}</div>
+
+                    <div class="thermal-secao">DADOS DO PEDIDO</div>
+                    <div style="font-size: 14pt; font-weight: 900; margin: 2mm 0;">
+                        TIPO: ${type === 'presencial' ? `MESA ${mesa} (${modoConsumo.toUpperCase()})` : `ENTREGA`}
+                    </div>
+
+                    ${type === 'entrega' ? `
+                        <div class="thermal-secao">ENDEREÇO</div>
+                        <div style="font-size: 12pt; font-weight: 900;">${rua}, ${num}</div>
+                        <div style="font-size: 12pt; font-weight: 900;">${bairroText} - ${cidadeText}</div>
+                        <div style="font-size: 10pt;">REF: ${ref}</div>
+                        <div style="font-size: 14pt; font-weight: 900; margin-top: 2mm; border-top: 1px solid black;">PAG: ${infoPagamento}</div>
+                    ` : ''}
+
+                    <div class="thermal-total">
+                        <div style="font-size: 10pt;">SUBTOTAL: R$ ${subtotal.toFixed(2)}</div>
+                        ${taxa > 0 ? `<div style="font-size: 10pt;">TAXA: R$ ${taxa.toFixed(2)}</div>` : ''}
+                        TOTAL R$ ${total.toFixed(2)}
+                    </div>
+
+                    ${temBebida ? `<div class="thermal-alerta">⚠️ NÃO ESQUEÇA<br>A BEBIDA!</div>` : ''}
+                    ${levaMaquininha ? `<div class="thermal-alerta">💳 LEVAR A<br>MAQUININHA!</div>` : ''}
+
+                    <div style="text-align:center; margin-top: 8mm; font-size: 8pt; border-top: 1px dashed #ccc;">${new Date().toLocaleString('pt-BR')}</div>
                 `;
                 window.print();
                 limpar();
@@ -546,7 +564,7 @@
             document.getElementById('troco').value = "";
             updatePaymentUI();
             calc();
-            toggleCart();
+            if(!document.getElementById('cart-modal').classList.contains('hidden')) toggleCart();
         }
 
         window.onload = render;
