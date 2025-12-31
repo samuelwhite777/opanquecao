@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>O Panquecão - Cardápio Digital</title>
     
-    <!-- Favicon e Ícones (Ajustados para a pasta ./imagem/) -->
+    <!-- Favicon e Ícones (Ajustados para a pasta imagem/) -->
     <link rel="icon" type="image/x-icon" href="imagem/favicon.ico">
     <link rel="shortcut icon" href="imagem/favicon.ico" type="image/x-icon">
     <!-- Ícone para Apple/iOS -->
@@ -57,8 +57,16 @@
             border-bottom: 3px solid #ef4444;
             display: flex;
             overflow-x: auto;
+            justify-content: center; /* Centraliza as categorias horizontalmente */
             gap: 8px;
             padding: 12px;
+        }
+
+        /* Ajuste para dispositivos móveis: se as abas não couberem, alinham à esquerda para scroll funcional */
+        @media (max-width: 640px) {
+            .sticky-tabs {
+                justify-content: flex-start;
+            }
         }
 
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -215,33 +223,33 @@
 
     <script>
         const menu = [
-            { id: 'panquecas-salgadas', title: 'Salgadas', img: './imagem/panqueca_salgada.png', hasSize: true, items: [
+            { id: 'panquecas-salgadas', title: 'Salgadas', img: 'imagem/panqueca_salgada.png', hasSize: true, items: [
                 { n: 'Frango com Requeijão', d: 'Peito de frango desfiado com requeijão cremoso.', pm: 28, pg: 38 },
                 { n: 'Carne Moída Especial', d: 'Carne bovina temperada, ovo e queijo.', pm: 30, pg: 40 },
                 { n: 'Coração com Queijo', d: 'Coração de frango grelhado e mussarela.', pm: 35, pg: 48 }
             ]},
-            { id: 'panquecas-doces', title: 'Doces', img: './imagem/panqueca_doce.png', hasSize: true, items: [
+            { id: 'panquecas-doces', title: 'Doces', img: 'imagem/panqueca_doce.png', hasSize: true, items: [
                 { n: 'Nutella com Morango', d: 'Genuína Nutella com morangos frescos.', pm: 32, pg: 45 },
                 { n: 'Doce de Leite com Coco', d: 'Doce de leite artesanal e coco ralado.', pm: 25, pg: 35 }
             ]},
-            { id: 'porcoes', title: 'Porções', img: './imagem/porcoes.png', hasSize: true, items: [
+            { id: 'porcoes', title: 'Porções', img: 'imagem/porcoes.png', hasSize: true, items: [
                 { n: 'Frango Frito Crocante', d: 'Pedaços suculentos empanados na hora.', pm: 35, pg: 55 },
                 { n: 'Batata Frita Tradicional', d: 'Porção crocante de batata palito.', pm: 20, pg: 35 }
             ]},
-            { id: 'pastéis', title: 'Pastéis', img: './imagem/pasteis.png', items: [
+            { id: 'pastéis', title: 'Pastéis', img: 'imagem/pasteis.png', items: [
                 { n: 'Pastel de Carne', d: 'Recheio tradicional de carne moída.', p: 12 },
                 { n: 'Pastel de Queijo', d: 'Mussarela derretida em abundância.', p: 10 }
             ]},
-            { id: 'paoquecao', title: 'Pãoquecão', img: './imagem/paoquecao.png', items: [
+            { id: 'paoquecao', title: 'Pãoquecão', img: 'imagem/paoquecao.png', items: [
                 { n: 'Pãoquecão da Casa', d: 'A receita secreta em formato de pão.', p: 25 }
             ]},
-            { id: 'lasanhas', title: 'Lasanhas', img: './imagem/lasanhas.png', items: [
+            { id: 'lasanhas', title: 'Lasanhas', img: 'imagem/lasanhas.png', items: [
                 { n: 'Lasanha à Bolonhesa', d: 'Massa fresca, molho e queijo.', p: 35 }
             ]},
-            { id: 'gelados', title: 'Gelados', img: './imagem/gelados.png', items: [
+            { id: 'gelados', title: 'Gelados', img: 'imagem/gelados.png', items: [
                 { n: 'Açaí Especial 500ml', d: 'Açaí completo com 3 adicionais.', p: 25 }
             ]},
-            { id: 'bebidas', title: 'Bebidas', img: './imagem/bebidas.png', items: [
+            { id: 'bebidas', title: 'Bebidas', img: 'imagem/bebidas.png', items: [
                 { n: 'Coca-Cola 2 Litros', d: 'Garrafa PET bem gelada.', p: 15 },
                 { n: 'Refrigerante Lata', d: 'Lata 350ml variados.', p: 6 }
             ]}
