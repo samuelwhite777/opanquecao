@@ -4,6 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>O Panquecão - Cardápio Digital</title>
+    
+    <!-- Favicon e Ícones (Ajustados para a pasta ./imagem/) -->
+    <link rel="icon" type="image/x-icon" href="imagem/favicon.ico">
+    <link rel="shortcut icon" href="imagem/favicon.ico" type="image/x-icon">
+    <!-- Ícone para Apple/iOS -->
+    <link rel="apple-touch-icon" href="imagem/favicon.ico">
+    
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -31,7 +38,7 @@
             border-radius: 20px; 
             margin-bottom: 20px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-            background-color: #333; /* Fallback caso a imagem falhe */
+            background-color: #333;
         }
 
         .category-header::after {
@@ -67,29 +74,47 @@
             transition: transform 0.2s;
         }
 
-        /* Lógica de Visibilidade: Oculta por padrão se a classe client-mode estiver no body */
         body.client-mode .admin-feature { display: none !important; }
         body.client-mode .pb-28 { padding-bottom: 1rem !important; }
 
-        /* Correção do PDF e Impressão */
+        /* Estilo para Impressão e Impressora Térmica (80mm) */
         @media print {
-            body { background: white !important; }
-            #main-body, .admin-feature, header, nav, footer { display: none !important; }
-            #print-area {
-                display: block !important;
-                position: absolute; 
-                left: 0; 
-                top: 0; 
-                width: 100%;
-                padding: 0;
+            @page {
                 margin: 0;
+                size: 80mm auto; 
+            }
+            
+            body * {
+                visibility: hidden;
+            }
+
+            #print-area, #print-area * {
+                visibility: visible;
                 color: black !important;
             }
-            .print-client-name { font-size: 32pt; font-weight: 900; border: 4px solid black; padding: 15px; text-align: center; margin-bottom: 20px; text-transform: uppercase; }
-            .print-item-title { font-size: 22pt; font-weight: 900; line-height: 1.2; margin-top: 10px; }
-            .print-item-obs { font-size: 16pt; background: #eee; padding: 5px; margin-top: 5px; font-style: italic; border-left: 5px solid #000; }
-            .print-total { font-size: 36pt; font-weight: 900; border-top: 6px solid black; margin-top: 20px; padding-top: 10px; text-align: right; }
+
+            #print-area {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                padding: 10mm 5mm;
+                display: block !important;
+                background: white !important;
+                font-family: 'Courier New', Courier, monospace;
+            }
+
+            .thermal-header { font-size: 18pt; font-weight: bold; text-align: center; border-bottom: 2px solid black; margin-bottom: 5mm; padding-bottom: 2mm; }
+            .thermal-client { font-size: 14pt; font-weight: bold; margin-bottom: 3mm; text-transform: uppercase; border: 1px solid black; padding: 2mm; text-align: center; }
+            .thermal-info { font-size: 11pt; margin-bottom: 5mm; border-bottom: 1px dashed black; padding-bottom: 2mm; }
+            .thermal-item { font-size: 11pt; margin-bottom: 3mm; border-bottom: 1px dotted #ccc; padding-bottom: 2mm; }
+            .thermal-item-title { font-weight: bold; font-size: 12pt; }
+            .thermal-item-obs { font-size: 10pt; font-style: italic; margin-left: 2mm; }
+            .thermal-total { font-size: 16pt; font-weight: bold; text-align: right; margin-top: 5mm; border-top: 2px solid black; padding-top: 2mm; }
+            
+            header, nav, main, footer, .admin-feature, #cart-modal { display: none !important; }
         }
+
         #print-area { display: none; }
     </style>
 </head>
@@ -113,7 +138,6 @@
 
     <main class="max-w-xl mx-auto p-4 w-full flex flex-col" id="menu-container"></main>
 
-    <!-- Barra de Resumo (Admin Feature) -->
     <div class="admin-feature fixed bottom-6 left-0 right-0 px-4 flex justify-center z-50">
         <button onclick="toggleCart()" class="w-full max-w-md bg-red-600 text-white p-5 rounded-2xl shadow-2xl flex justify-between items-center transition-transform active:scale-95">
             <div class="flex items-center space-x-4">
@@ -127,7 +151,6 @@
         </button>
     </div>
 
-    <!-- Modal de Checkout (Admin Feature) -->
     <div id="cart-modal" class="admin-feature fixed inset-0 bg-black/70 z-[100] hidden flex flex-col justify-end sm:justify-center items-center backdrop-blur-sm p-4">
         <div class="bg-white w-full max-w-lg rounded-3xl flex flex-col max-h-[90vh] p-6 shadow-2xl overflow-hidden">
             <div class="flex justify-between items-center mb-4">
@@ -178,7 +201,7 @@
 
             <div class="grid grid-cols-2 gap-3">
                 <button onclick="executarAcao('imprimir')" class="bg-gray-900 text-white p-4 rounded-xl font-black text-[10px] uppercase flex items-center justify-center space-x-2 active:scale-95 transition-all">
-                    <i class="fas fa-print"></i> <span>Imprimir PDF</span>
+                    <i class="fas fa-print"></i> <span>Cupom/Térmica</span>
                 </button>
                 <button onclick="executarAcao('whatsapp')" class="bg-green-600 text-white p-4 rounded-xl font-black text-[10px] uppercase flex items-center justify-center space-x-2 active:scale-95 transition-all">
                     <i class="fab fa-whatsapp"></i> <span>WhatsApp</span>
@@ -187,11 +210,10 @@
         </div>
     </div>
 
-    <!-- Área de Impressão (DOM separado para evitar conflitos de estilo) -->
+    <!-- Área de Impressão Específica -->
     <div id="print-area"></div>
 
     <script>
-        // Imagens corrigidas: Se as imagens não existirem na pasta local, o fallback será a cor cinza no cabeçalho.
         const menu = [
             { id: 'panquecas-salgadas', title: 'Salgadas', img: './imagem/panqueca_salgada.png', hasSize: true, items: [
                 { n: 'Frango com Requeijão', d: 'Peito de frango desfiado com requeijão cremoso.', pm: 28, pg: 38 },
@@ -325,58 +347,64 @@
             document.getElementById('area-entrega').classList.toggle('hidden', type !== 'entrega');
         }
 
-        // Validação e Execução Centralizada
         function executarAcao(tipo) {
-            const nome = document.getElementById('client-name').value.trim();
-            if(!cart.length) { alert("Adicione pelo menos um item ao carrinho."); return; }
-            if(!nome) { alert("Por favor, informe o NOME DO CLIENTE."); return; }
+            const nomeInput = document.getElementById('client-name');
+            const nome = nomeInput.value.trim();
+            if(!cart.length) { alert("Carrinho vazio!"); return; }
+            if(!nome) { alert("Informe o Nome do Cliente!"); nomeInput.focus(); return; }
 
             const type = document.querySelector('input[name="order-type"]:checked').value;
-            const mesa = document.getElementById('mesa').value;
-            const endereco = document.getElementById('endereco').value.trim();
+            const mesaInput = document.getElementById('mesa');
+            const mesa = mesaInput.value;
+            const enderecoInput = document.getElementById('endereco');
+            const endereco = enderecoInput.value.trim();
 
-            if(type === 'presencial' && !mesa) { alert("Por favor, informe o NÚMERO DA MESA."); return; }
-            if(type === 'entrega' && !endereco) { alert("Por favor, informe o ENDEREÇO DE ENTREGA."); return; }
+            if(type === 'presencial' && !mesa) { alert("Informe a Mesa!"); mesaInput.focus(); return; }
+            if(type === 'entrega' && !endereco) { alert("Informe o Endereço!"); enderecoInput.focus(); return; }
 
             if(tipo === 'imprimir') {
-                gerarImpressao(nome, type, mesa, endereco);
+                gerarCupomTermico(nome, type, mesa, endereco);
             } else {
                 gerarWhatsApp(nome, type, mesa, endereco);
             }
         }
 
-        function gerarImpressao(nome, type, mesa, endereco) {
+        function gerarCupomTermico(nome, type, mesa, endereco) {
             const modoConsumo = document.getElementById('comer-levar').value;
             const total = cart.reduce((a, b) => a + b.p, 0).toFixed(2);
+            const dataHora = new Date().toLocaleString('pt-BR');
             
             let html = `
-                <div style="text-align:center; margin-bottom: 20px;">
-                    <b style="font-size: 28pt; font-family: 'Arial Black';">O PANQUECÃO</b><br>
-                    <span style="font-size: 12pt;">Comprovante de Pedido</span>
+                <div class="thermal-header">O PANQUECÃO</div>
+                <div class="thermal-client">${nome}</div>
+                <div class="thermal-info">
+                    <b>PEDIDO:</b> ${dataHora}<br>
+                    <b>TIPO:</b> ${type === 'presencial' ? `MESA ${mesa} (${modoConsumo.toUpperCase()})` : `ENTREGA`}
+                    ${type === 'entrega' ? `<br><b>END:</b> ${endereco.toUpperCase()}` : ''}
                 </div>
-                <div class="print-client-name">${nome}</div>
-                <div style="font-size: 16pt; font-weight: bold; background: #000; color: #fff; text-align: center; padding: 10px; margin-bottom: 20px;">
-                    ${type === 'presencial' ? `MESA: ${mesa} | ${modoConsumo.toUpperCase()}` : `ENTREGA: ${endereco.toUpperCase()}`}
-                </div>
-                <div>
+                <div style="font-weight: bold; margin-bottom: 2mm;">ITENS:</div>
             `;
             
             cart.forEach(i => {
                 html += `
-                    <div style="margin-bottom: 15px; border-bottom: 1px dashed #000; padding-bottom: 10px;">
-                        <div class="print-item-title">1x ${i.n.toUpperCase()} (${i.sz})</div>
-                        <div style="font-size: 14pt; text-align: right;">R$ ${i.p.toFixed(2)}</div>
-                        ${i.obs ? `<div class="print-item-obs">NOTAS: ${i.obs}</div>` : ''}
+                    <div class="thermal-item">
+                        <div class="thermal-item-title">1x ${i.n.toUpperCase()} (${i.sz})</div>
+                        <div style="text-align: right;">R$ ${i.p.toFixed(2)}</div>
+                        ${i.obs ? `<div class="thermal-item-obs">>> ${i.obs}</div>` : ''}
                     </div>
                 `;
             });
             
-            html += `</div><div class="print-total">TOTAL R$ ${total}</div>`;
-            html += `<div style="text-align:center; margin-top: 30px; font-size: 10pt;">Obrigado pela preferência!</div>`;
+            html += `<div class="thermal-total">TOTAL R$ ${total}</div>`;
+            html += `<div style="text-align:center; margin-top: 10mm; font-size: 9pt;">*** CUPOM NÃO FISCAL ***</div>`;
             
             const area = document.getElementById('print-area');
             area.innerHTML = html;
-            window.print();
+            
+            setTimeout(() => {
+                window.print();
+                limparCarrinho();
+            }, 250);
         }
 
         function gerarWhatsApp(nome, type, mesa, endereco) {
@@ -395,9 +423,20 @@
             
             msg += `\n*TOTAL: R$ ${cart.reduce((a, b) => a + b.p, 0).toFixed(2)}*`;
             
-            // Substitua pelo seu número oficial
             const fone = "5551997383849";
             window.open(`https://api.whatsapp.com/send?phone=${fone}&text=${encodeURIComponent(msg)}`, '_blank');
+            limparCarrinho();
+        }
+
+        function limparCarrinho() {
+            cart = [];
+            document.getElementById('client-name').value = "";
+            document.getElementById('mesa').value = "";
+            document.getElementById('endereco').value = "";
+            calc();
+            if(!document.getElementById('cart-modal').classList.contains('hidden')) {
+                toggleCart();
+            }
         }
 
         window.onload = render;
