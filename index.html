@@ -131,7 +131,7 @@
 
     <!-- Navegação de Categorias -->
     <nav class="sticky-tabs no-scrollbar">
-        <a href="#panquecas-salgadas" class="flex-shrink-0 px-4 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600 active:bg-red-600 active:text-white">Salgadas</a>
+        <a href="#panquecas-salgadas" class="flex-shrink-0 px-4 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Salgadas</a>
         <a href="#panquecas-doces" class="flex-shrink-0 px-4 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Doces</a>
         <a href="#porcoes" class="flex-shrink-0 px-4 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Porções</a>
         <a href="#pastéis" class="flex-shrink-0 px-4 py-2 rounded-xl bg-gray-100 text-[10px] font-black uppercase text-gray-600">Pastéis</a>
@@ -220,8 +220,23 @@
                             </select>
                         </div>
                         
-                        <div id="area-entrega" class="hidden">
-                            <input type="text" id="endereco" placeholder="ENDEREÇO COMPLETO" class="w-full p-3 bg-white border rounded-xl text-[10px] font-black uppercase">
+                        <!-- ÁREA DE ENTREGA DETALHADA -->
+                        <div id="area-entrega" class="hidden space-y-2">
+                            <div class="grid grid-cols-2 gap-2">
+                                <select id="cidade-entrega" onchange="updateBairros()" class="p-3 bg-white border rounded-xl text-[10px] font-black uppercase">
+                                    <option value="">Cidade...</option>
+                                    <option value="nova_hartz">Nova Hartz</option>
+                                    <option value="ararica">Araricá</option>
+                                </select>
+                                <select id="bairro-entrega" onchange="calc()" class="p-3 bg-white border rounded-xl text-[10px] font-black uppercase">
+                                    <option value="">Bairro...</option>
+                                </select>
+                            </div>
+                            <div class="grid grid-cols-4 gap-2">
+                                <input type="text" id="rua-entrega" placeholder="RUA" class="col-span-3 p-3 bg-white border rounded-xl text-[10px] font-black uppercase">
+                                <input type="text" id="numero-entrega" placeholder="Nº" class="col-span-1 p-3 bg-white border rounded-xl text-[10px] font-black uppercase">
+                            </div>
+                            <input type="text" id="ponto-referencia" placeholder="PONTO DE REFERÊNCIA" class="w-full p-3 bg-white border rounded-xl text-[10px] font-black uppercase">
                         </div>
                     </div>
 
@@ -254,9 +269,12 @@
                 </div>
             </div>
 
-            <div class="py-4 border-t-2 border-dashed border-gray-100 flex justify-between items-center">
-                <span class="font-black uppercase text-gray-400 text-xs">Total</span>
-                <span id="res-total" class="font-black text-2xl text-red-600">R$ 0,00</span>
+            <div class="py-2 flex flex-col items-end border-t-2 border-dashed border-gray-100">
+                <div id="taxa-entrega-display" class="hidden text-[10px] font-black text-gray-400 uppercase">Taxa de Entrega: R$ 0,00</div>
+                <div class="flex justify-between w-full items-center">
+                    <span class="font-black uppercase text-gray-400 text-xs">Total</span>
+                    <span id="res-total" class="font-black text-2xl text-red-600">R$ 0,00</span>
+                </div>
             </div>
 
             <div class="grid grid-cols-2 gap-3">
@@ -306,12 +324,24 @@
             ]}
         ];
 
+        const bairros = {
+            nova_hartz: [
+                {n: "Centro", t: 5}, {n: "Campo Vicente", t: 7}, {n: "Imigrante", t: 6}, 
+                {n: "Das Rosas", t: 6}, {n: "Progresso", t: 7}, {n: "Primavera", t: 6},
+                {n: "Vila Nova", t: 7}, {n: "Bela Vista", t: 8}, {n: "Liberdade", t: 8}
+            ],
+            ararica: [
+                {n: "Centro", t: 10}, {n: "Estação", t: 12}, {n: "Imperatriz", t: 12}, 
+                {n: "Azaléia", t: 13}, {n: "Canoa", t: 15}, {n: "Campo da Brazina", t: 15},
+                {n: "Integração", t: 13}, {n: "Emancipação", t: 12}
+            ]
+        };
+
         let cart = [];
         const isAdmin = new URLSearchParams(window.location.search).get('modo') === 'admin';
 
         function render() {
             if (isAdmin) document.body.classList.add('admin-mode');
-
             const container = document.getElementById('menu-container');
             container.innerHTML = menu.map(c => `
                 <section id="${c.id}" class="mb-8">
@@ -323,7 +353,6 @@
                             <div class="product-card">
                                 <h3 class="font-black text-gray-800 uppercase text-sm">${it.n}</h3>
                                 <p class="text-[10px] text-gray-400 font-bold mb-3">${it.d}</p>
-                                
                                 ${c.hasSize ? `
                                     <div class="flex items-center justify-between mb-3">
                                         <div class="flex space-x-2">
@@ -342,7 +371,6 @@
                                         </div>
                                     </div>
                                 ` : `<div class="font-black text-red-600 text-base mb-3">R$ ${it.p.toFixed(2)}</div>`}
-
                                 <div class="admin-only flex flex-col pt-3 border-t">
                                     <input type="text" id="obs-${c.id}-${i}" placeholder="OBSERVAÇÕES..." class="bg-gray-50 p-2 rounded-lg text-[10px] font-bold outline-none mb-2 border border-transparent focus:border-red-200 uppercase">
                                     <button onclick="add('${c.id}', ${i})" class="bg-gray-900 text-white py-3 rounded-xl text-[10px] font-black uppercase tracking-widest active:bg-red-600">Lançar Item</button>
@@ -354,16 +382,29 @@
             `).join('');
         }
 
+        function updateBairros() {
+            const cidade = document.getElementById('cidade-entrega').value;
+            const selectBairro = document.getElementById('bairro-entrega');
+            selectBairro.innerHTML = '<option value="">Bairro...</option>';
+            if (cidade) {
+                bairros[cidade].forEach(b => {
+                    const opt = document.createElement('option');
+                    opt.value = b.t;
+                    opt.innerText = `${b.n} (R$${b.t})`;
+                    selectBairro.appendChild(opt);
+                });
+            }
+            calc();
+        }
+
         function add(cid, idx) {
             const cat = menu.find(c => c.id === cid);
             const it = cat.items[idx];
             let size = 'U', price = it.p || 0;
-            
             if(cat.hasSize) {
                 size = document.querySelector(`input[name="sz-${cid}-${idx}"]:checked`).value;
                 price = size === 'M' ? it.pm : it.pg;
             }
-            
             const obsInput = document.getElementById(`obs-${cid}-${idx}`);
             cart.push({ n: it.n, sz: size, p: price, obs: obsInput.value.toUpperCase(), id: Date.now() });
             obsInput.value = "";
@@ -371,7 +412,19 @@
         }
 
         function calc() {
-            const total = cart.reduce((a, b) => a + b.p, 0);
+            let total = cart.reduce((a, b) => a + b.p, 0);
+            const type = document.querySelector('input[name="order-type"]:checked').value;
+            const taxaEntregaDisplay = document.getElementById('taxa-entrega-display');
+            
+            if (type === 'entrega') {
+                const taxa = parseFloat(document.getElementById('bairro-entrega').value) || 0;
+                total += taxa;
+                taxaEntregaDisplay.innerText = `Taxa de Entrega: R$ ${taxa.toFixed(2)}`;
+                taxaEntregaDisplay.classList.remove('hidden');
+            } else {
+                taxaEntregaDisplay.classList.add('hidden');
+            }
+
             document.getElementById('cart-count').innerText = cart.length;
             document.getElementById('cart-total-badge').innerText = `R$ ${total.toFixed(2)}`;
             document.getElementById('res-total').innerText = `R$ ${total.toFixed(2)}`;
@@ -402,40 +455,43 @@
             const type = document.querySelector('input[name="order-type"]:checked').value;
             document.getElementById('area-presencial').classList.toggle('hidden', type !== 'presencial');
             document.getElementById('area-entrega').classList.toggle('hidden', type !== 'entrega');
+            calc();
         }
 
         function updatePaymentUI() {
             const method = document.getElementById('payment-method').value;
             const container = document.getElementById('payment-options');
-            
             document.getElementById('opt-dinheiro').classList.add('hidden');
             document.getElementById('opt-credito').classList.add('hidden');
             container.classList.add('hidden');
-
             if (method === 'DINHEIRO') {
                 container.classList.remove('hidden');
                 document.getElementById('opt-dinheiro').classList.remove('hidden');
             } else if (method === 'CREDITO') {
                 container.classList.remove('hidden');
                 document.getElementById('opt-credito').classList.remove('hidden');
-            } else if (method === 'PIX' || method === 'DEBITO') {
-                container.classList.add('hidden'); // Sem opções adicionais para estes
             }
         }
 
         function executarAcao(tipo) {
             const nome = document.getElementById('client-name').value.trim();
             const payMethod = document.getElementById('payment-method').value;
-
             if(!cart.length || !nome) return alert("Verifique itens e nome!");
             if(!payMethod) return alert("Selecione a forma de pagamento!");
 
             const type = document.querySelector('input[name="order-type"]:checked').value;
             const mesa = document.getElementById('mesa').value;
-            const endereco = document.getElementById('endereco').value.trim();
+            const cidadeSelect = document.getElementById('cidade-entrega');
+            const cidadeText = cidadeSelect.options[cidadeSelect.selectedIndex].text;
+            const bairroSelect = document.getElementById('bairro-entrega');
+            const bairroText = bairroSelect.options[bairroSelect.selectedIndex].text.split('(')[0].trim();
+            const rua = document.getElementById('rua-entrega').value.trim();
+            const num = document.getElementById('numero-entrega').value.trim();
+            const ref = document.getElementById('ponto-referencia').value.trim();
             const modoConsumo = document.getElementById('comer-levar').value;
+            const taxa = type === 'entrega' ? parseFloat(bairroSelect.value || 0) : 0;
+            const total = cart.reduce((a, b) => a + b.p, 0) + taxa;
 
-            // Formatação do texto do pagamento
             let infoPagamento = payMethod;
             if (payMethod === 'DINHEIRO') {
                 const troco = document.getElementById('troco').value;
@@ -452,7 +508,7 @@
                     <div style="font-size: 8pt; margin-bottom: 3mm;">
                         DATA: ${new Date().toLocaleString('pt-BR')}<br>
                         TIPO: ${type === 'presencial' ? `MESA ${mesa} (${modoConsumo.toUpperCase()})` : `ENTREGA`}
-                        ${type === 'entrega' ? `<br>END: ${endereco.toUpperCase()}` : ''}
+                        ${type === 'entrega' ? `<br>END: ${rua}, ${num} - ${bairroText} (${cidadeText})<br>REF: ${ref}` : ''}
                         <br>PAG: ${infoPagamento}
                     </div>
                     <div style="font-weight: bold; border-bottom: 1px solid black;">ITENS:</div>
@@ -462,17 +518,19 @@
                             ${i.obs ? `<div style="font-size: 8pt; font-style: italic;">>> ${i.obs}</div>` : ''}
                         </div>
                     `).join('')}
-                    <div class="thermal-total">TOTAL R$ ${cart.reduce((a, b) => a + b.p, 0).toFixed(2)}</div>
-                    <div style="text-align:center; margin-top: 5mm; font-size: 8pt;">- Uso Interno -</div>
+                    ${taxa > 0 ? `<div style="font-size: 9pt;">TAXA ENTREGA: <span style="float:right">R$ ${taxa.toFixed(2)}</span></div>` : ''}
+                    <div class="thermal-total">TOTAL R$ ${total.toFixed(2)}</div>
                 `;
                 window.print();
                 limpar();
             } else {
                 let msg = `*PEDIDO O PANQUECÃO*\n\n*Cliente:* ${nome.toUpperCase()}\n*Tipo:* ${type === 'presencial' ? `Mesa ${mesa} (${modoConsumo})` : 'Entrega'}\n`;
-                if(type === 'entrega') msg += `*End:* ${endereco}\n`;
-                msg += `*Pagamento:* ${infoPagamento}\n`;
-                msg += `\n*ITENS:*\n` + cart.map(i => `• 1x ${i.n} (${i.sz}) - R$ ${i.p.toFixed(2)}${i.obs ? `\n  _Obs: ${i.obs}_` : ''}`).join('\n');
-                msg += `\n\n*TOTAL: R$ ${cart.reduce((a, b) => a + b.p, 0).toFixed(2)}*`;
+                if(type === 'entrega') {
+                    msg += `*Cidade:* ${cidadeText}\n*Bairro:* ${bairroText}\n*End:* ${rua}, ${num}\n*Ref:* ${ref}\n`;
+                }
+                msg += `*Pagamento:* ${infoPagamento}\n\n*ITENS:*\n` + cart.map(i => `• 1x ${i.n} (${i.sz}) - R$ ${i.p.toFixed(2)}${i.obs ? `\n  _Obs: ${i.obs}_` : ''}`).join('\n');
+                if(taxa > 0) msg += `\n*Taxa Entrega:* R$ ${taxa.toFixed(2)}`;
+                msg += `\n\n*TOTAL: R$ ${total.toFixed(2)}*`;
                 window.open(`https://api.whatsapp.com/send?phone=5551997383849&text=${encodeURIComponent(msg)}`, '_blank');
                 limpar();
             }
@@ -482,7 +540,9 @@
             cart = [];
             document.getElementById('client-name').value = "";
             document.getElementById('mesa').value = "";
-            document.getElementById('endereco').value = "";
+            document.getElementById('rua-entrega').value = "";
+            document.getElementById('numero-entrega').value = "";
+            document.getElementById('ponto-referencia').value = "";
             document.getElementById('payment-method').value = "";
             document.getElementById('troco').value = "";
             updatePaymentUI();
