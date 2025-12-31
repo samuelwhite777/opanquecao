@@ -199,6 +199,7 @@
 
                     <div id="cart-items" class="space-y-2"></div>
 
+                    <!-- Lógica de Tipo de Pedido -->
                     <div class="bg-gray-50 p-4 rounded-xl space-y-3">
                         <div class="flex space-x-2">
                             <label class="flex-1 cursor-pointer">
@@ -221,6 +222,33 @@
                         
                         <div id="area-entrega" class="hidden">
                             <input type="text" id="endereco" placeholder="ENDEREÇO COMPLETO" class="w-full p-3 bg-white border rounded-xl text-[10px] font-black uppercase">
+                        </div>
+                    </div>
+
+                    <!-- SEÇÃO DE PAGAMENTO INTEGRADA -->
+                    <div class="bg-gray-50 p-4 rounded-xl space-y-3">
+                        <label class="text-[10px] font-black text-gray-400 uppercase tracking-widest">Forma de Pagamento</label>
+                        <select id="payment-method" onchange="updatePaymentUI()" class="w-full p-3 bg-white border rounded-xl font-bold uppercase text-xs">
+                            <option value="">Selecione...</option>
+                            <option value="PIX">Pix</option>
+                            <option value="CREDITO">Cartão Crédito</option>
+                            <option value="DEBITO">Cartão Débito</option>
+                            <option value="DINHEIRO">Dinheiro</option>
+                        </select>
+
+                        <div id="payment-options" class="hidden">
+                            <!-- Troco -->
+                            <div id="opt-dinheiro" class="hidden">
+                                <input type="text" id="troco" placeholder="TROCO PARA QUANTO?" class="w-full p-3 bg-white border rounded-xl text-[10px] font-black uppercase">
+                            </div>
+                            <!-- Parcelas -->
+                            <div id="opt-credito" class="hidden">
+                                <select id="parcelas" class="w-full p-3 bg-white border rounded-xl text-[10px] font-black uppercase">
+                                    <option value="A Vista">A Vista</option>
+                                    <option value="2x sem juros">2x sem juros</option>
+                                    <option value="3x sem juros">3x sem juros</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -369,20 +397,52 @@
 
         function rem(id) { cart = cart.filter(i => i.id !== id); calc(); }
         function toggleCart() { document.getElementById('cart-modal').classList.toggle('hidden'); }
+        
         function updateUI() {
             const type = document.querySelector('input[name="order-type"]:checked').value;
             document.getElementById('area-presencial').classList.toggle('hidden', type !== 'presencial');
             document.getElementById('area-entrega').classList.toggle('hidden', type !== 'entrega');
         }
 
+        function updatePaymentUI() {
+            const method = document.getElementById('payment-method').value;
+            const container = document.getElementById('payment-options');
+            
+            document.getElementById('opt-dinheiro').classList.add('hidden');
+            document.getElementById('opt-credito').classList.add('hidden');
+            container.classList.add('hidden');
+
+            if (method === 'DINHEIRO') {
+                container.classList.remove('hidden');
+                document.getElementById('opt-dinheiro').classList.remove('hidden');
+            } else if (method === 'CREDITO') {
+                container.classList.remove('hidden');
+                document.getElementById('opt-credito').classList.remove('hidden');
+            } else if (method === 'PIX' || method === 'DEBITO') {
+                container.classList.add('hidden'); // Sem opções adicionais para estes
+            }
+        }
+
         function executarAcao(tipo) {
             const nome = document.getElementById('client-name').value.trim();
+            const payMethod = document.getElementById('payment-method').value;
+
             if(!cart.length || !nome) return alert("Verifique itens e nome!");
+            if(!payMethod) return alert("Selecione a forma de pagamento!");
 
             const type = document.querySelector('input[name="order-type"]:checked').value;
             const mesa = document.getElementById('mesa').value;
             const endereco = document.getElementById('endereco').value.trim();
             const modoConsumo = document.getElementById('comer-levar').value;
+
+            // Formatação do texto do pagamento
+            let infoPagamento = payMethod;
+            if (payMethod === 'DINHEIRO') {
+                const troco = document.getElementById('troco').value;
+                infoPagamento += troco ? ` (TROCO PARA: ${troco})` : ` (SEM TROCO)`;
+            } else if (payMethod === 'CREDITO') {
+                infoPagamento += ` (${document.getElementById('parcelas').value})`;
+            }
 
             if(tipo === 'imprimir') {
                 const area = document.getElementById('print-area');
@@ -393,6 +453,7 @@
                         DATA: ${new Date().toLocaleString('pt-BR')}<br>
                         TIPO: ${type === 'presencial' ? `MESA ${mesa} (${modoConsumo.toUpperCase()})` : `ENTREGA`}
                         ${type === 'entrega' ? `<br>END: ${endereco.toUpperCase()}` : ''}
+                        <br>PAG: ${infoPagamento}
                     </div>
                     <div style="font-weight: bold; border-bottom: 1px solid black;">ITENS:</div>
                     ${cart.map(i => `
@@ -409,6 +470,7 @@
             } else {
                 let msg = `*PEDIDO O PANQUECÃO*\n\n*Cliente:* ${nome.toUpperCase()}\n*Tipo:* ${type === 'presencial' ? `Mesa ${mesa} (${modoConsumo})` : 'Entrega'}\n`;
                 if(type === 'entrega') msg += `*End:* ${endereco}\n`;
+                msg += `*Pagamento:* ${infoPagamento}\n`;
                 msg += `\n*ITENS:*\n` + cart.map(i => `• 1x ${i.n} (${i.sz}) - R$ ${i.p.toFixed(2)}${i.obs ? `\n  _Obs: ${i.obs}_` : ''}`).join('\n');
                 msg += `\n\n*TOTAL: R$ ${cart.reduce((a, b) => a + b.p, 0).toFixed(2)}*`;
                 window.open(`https://api.whatsapp.com/send?phone=5551997383849&text=${encodeURIComponent(msg)}`, '_blank');
@@ -421,6 +483,9 @@
             document.getElementById('client-name').value = "";
             document.getElementById('mesa').value = "";
             document.getElementById('endereco').value = "";
+            document.getElementById('payment-method').value = "";
+            document.getElementById('troco').value = "";
+            updatePaymentUI();
             calc();
             toggleCart();
         }
