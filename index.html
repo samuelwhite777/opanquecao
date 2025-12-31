@@ -107,16 +107,15 @@
             #print-area, #print-area * { visibility: visible; }
             #print-area {
                 position: absolute; left: 0; top: 0; width: 80mm;
-                padding: 5mm; display: block !important;
-                background: white !important;
-                font-family: 'Courier New', monospace;
+                padding: 2mm; display: block !important;
+                font-family: 'Arial', sans-serif; /* Mais legível que Courier */
                 color: black !important;
-                font-size: 10pt;
             }
-            .thermal-header { font-size: 16pt; font-weight: bold; text-align: center; border-bottom: 1px dashed black; margin-bottom: 3mm; padding-bottom: 2mm; }
-            .thermal-client { font-size: 12pt; font-weight: bold; text-align: center; border: 1px solid black; padding: 2mm; margin-bottom: 3mm; }
-            .thermal-item { margin-bottom: 2mm; border-bottom: 1px dotted #ccc; padding-bottom: 1mm; }
-            .thermal-total { font-size: 14pt; font-weight: bold; text-align: right; margin-top: 4mm; border-top: 1px solid black; }
+            .print-item-nome { font-size: 18pt; font-weight: 900; line-height: 1.1; }
+            .print-obs { font-size: 14pt; font-weight: bold; border: 1px solid black; padding: 1mm; margin-top: 1mm; }
+            .print-secao-titulo { font-size: 12pt; border-bottom: 2px solid black; margin-top: 4mm; font-weight: bold; }
+            .print-info-grande { font-size: 16pt; font-weight: 900; text-transform: uppercase; }
+            .print-alerta { font-size: 20pt; font-weight: 900; text-align: center; border: 3px solid black; padding: 2mm; margin-top: 5mm; }
         }
         #print-area { display: none; }
     </style>
