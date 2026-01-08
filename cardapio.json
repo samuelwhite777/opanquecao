@@ -1,1 +1,105 @@
 
+{
+"categorias": [
+{
+"id": "panquecas-salgadas",
+"titulo": "Panquecas Salgadas",
+"itens": [
+{
+"nome": "Carne Moída",
+"ingredientes": "Molho de tomate, carne moída perfeitamente temperada e queijo mussarela.",
+"tamanhos": { "P": "R$ 22,00", "M": "R$ 28,00", "G": "R$ 35,00" }
+},
+{
+"nome": "Frango com Catupiry",
+"ingredientes": "Frango desfiado suculento, catupiry original e queijo mussarela.",
+"tamanhos": { "P": "R$ 23,00", "M": "R$ 29,00", "G": "R$ 36,00" }
+},
+{
+"nome": "Coração",
+"ingredientes": "Coração de frango grelhado, molho especial e queijo mussarela.",
+"tamanhos": { "P": "R$ 25,00", "M": "R$ 32,00", "G": "R$ 40,00" }
+},
+{
+"nome": "Calabresa",
+"ingredientes": "Calabresa fatiada, cebola, molho de tomate e queijo mussarela.",
+"tamanhos": { "P": "R$ 22,00", "M": "R$ 28,00", "G": "R$ 35,00" }
+},
+{
+"nome": "Portuguesa",
+"ingredientes": "Presunto, ovo, cebola, ervilha, milho e queijo mussarela.",
+"tamanhos": { "P": "R$ 24,00", "M": "R$ 30,00", "G": "R$ 38,00" }
+}
+]
+},
+{
+"id": "panquecas-doces",
+"titulo": "Panquecas Doces",
+"itens": [
+{
+"nome": "Chocolate com Morango",
+"ingredientes": "Chocolate ao leite cremoso e morangos frescos fatiados.",
+"tamanhos": { "P": "R$ 20,00", "M": "R$ 26,00", "G": "R$ 32,00" }
+},
+{
+"nome": "Doce de Leite",
+"ingredientes": "Doce de leite artesanal e uma pitada de canela.",
+"tamanhos": { "P": "R$ 18,00", "M": "R$ 24,00", "G": "R$ 30,00" }
+},
+{
+"nome": "Prestígio",
+"ingredientes": "Chocolate ao leite e coco ralado generoso.",
+"tamanhos": { "P": "R$ 20,00", "M": "R$ 26,00", "G": "R$ 32,00" }
+}
+]
+},
+{
+"id": "massas",
+"titulo": "Massas",
+"itens": [
+{
+"nome": "Espaguete à Bolonhesa",
+"ingredientes": "Massa al dente com molho de carne moída e queijo ralado.",
+"preco": "R$ 25,00"
+},
+{
+"nome": "Lasanha de Frango",
+"ingredientes": "Camadas de massa, frango, molho branco e muita mussarela.",
+"preco": "R$ 32,00"
+}
+]
+},
+{
+"id": "acai",
+"titulo": "Açaí",
+"itens": [
+{
+"nome": "Açaí Tradicional",
+"sub": "Monte do seu jeito",
+"tamanhos_acai": [
+{ "tamanho": "300ml", "obs": "Acompanha 3 acompanhamentos", "preco": "R$ 15,00" },
+{ "tamanho": "500ml", "obs": "Acompanha 4 acompanhamentos", "preco": "R$ 20,00" },
+{ "tamanho": "700ml", "obs": "Acompanha 5 acompanhamentos", "preco": "R$ 25,00" }
+],
+"tags": ["Leite em Pó", "Granola", "Banana", "Leite Condensado", "Morango"]
+}
+]
+},
+{
+"id": "bebidas",
+"titulo": "Bebidas",
+"itens": [
+{ "nome": "Refrigerante Lata", "preco": "R$ 6,00" },
+{ "nome": "Refrigerante 2L", "preco": "R$ 12,00" },
+{ "nome": "Suco Natural", "preco": "R$ 8,00" },
+{ "nome": "Água Mineral", "preco": "R$ 4,00" }
+]
+}
+],
+"observacoes": [
+"Taxa de entrega sob consulta por bairro.",
+"Tempo médio de preparo: 20 a 40 minutos.",
+"Aceitamos Cartões, Pix e Dinheiro.",
+"Imagens meramente ilustrativas."
+]
+}
