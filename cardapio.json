@@ -1,6 +1,32 @@
 {
   "categorias": [
     {
+      "id": "acai",
+      "titulo": "AÇAÍ",
+      "itens": [
+        {
+          "nome": "Açaí Panquecão",
+          "sub": "Monte do seu jeito",
+          "tamanhos_acai": [
+            { "tamanho": "300ml", "obs": "3 complementos grátis", "preco": "R$ 16,00" },
+            { "tamanho": "500ml", "obs": "4 complementos grátis", "preco": "R$ 22,00" }
+          ],
+          "tags": [
+            "Leite Condensado",
+            "Leite Ninho",
+            "Granola",
+            "Granulado",
+            "Ovo Maltine",
+            "Confete",
+            "Paçoca",
+            "Creme de Morango",
+            "Creme de Avelã",
+            "Creme de Leite Ninho"
+          ]
+        }
+      ]
+    },
+    {
       "id": "panquecas-salgadas",
       "titulo": "PANQUECAS SALGADAS",
       "itens": [
@@ -158,6 +184,105 @@
       ]
     },
     {
+      "id": "panquecas-2-sabores",
+      "titulo": "PANQUECAS 2 SABORES",
+      "itens": [
+        {
+          "nome": "Panqueca Meio a Meio (2 Sabores Salgados)",
+          "ingredientes": "Os sabores são os mesmos do cardápio de panquecas salgadas",
+          "preco": "R$ 40,00"
+        },
+        {
+          "nome": "Panqueca Meio a Meio (2 Sabores Doces)",
+          "ingredientes": "Os sabores são os mesmos do cardápio de panquecas doces",
+          "preco": "R$ 40,00"
+        },
+        {
+          "nome": "Panqueca Meio a Meio (Salgada e Doce)",
+          "ingredientes": "Os sabores são os mesmos do cardápio de panquecas",
+          "preco": "R$ 40,00"
+        }
+      ]
+    },
+    {
+      "id": "lasanhas-de-massa-de-panqueca",
+      "titulo": "LASANHAS DE MASSA DE PANQUECA",
+      "itens": [
+        {
+          "nome": "Estrogonofe de Frango",
+          "ingredientes": "Massa espaguete, frango, creme de leite, ketchup, mussarela, batata palha e oregano",
+          "preco": "R$ 49,00"
+        },
+        {
+          "nome": "Frango e Catupiry",
+          "ingredientes": "Massa espaguete, frango, creme de leite, ketchup, mussarela, batata palha e oregano",
+          "preco": "R$ 49,00"
+        },
+        {
+          "nome": "Estrogonofe de Carne",
+          "ingredientes": "Massa espaguete, carne de panela, creme de leite, ketchup, mussarela, batata palha e oregano",
+          "preco": "R$ 49,00"
+        },
+        {
+          "nome": "Carne de Panela",
+          "ingredientes": "Massa espaguete, carne de panela, creme de leite, ketchup, mussarela, batata palha e oregano",
+          "preco": "R$ 49,00"
+        },
+        {
+          "nome": "Meio a Meio (2 Sabores)",
+          "ingredientes": "Combinação de dois sabores do cardápio",
+          "preco": "R$ 55,00"
+        }
+      ]
+    },
+    {
+      "id": "frango-frito-crocrante-no-pote",
+      "titulo": "FRANGO FRITO CROCRANTE NO POTE",
+      "itens": [
+        {
+          "nome": "Frango Frito Crocrante no Pote",
+          "ingredientes": "Filé de frango frito empanado, molho barbecue, maionese verde e maionese rosa",
+          "preco": "R$ 82,00"
+        },
+        {
+          "nome": "Frango + Polenta",
+          "ingredientes": "Filé de frango frito empanado, molho barbecue, maionese verde, maionese rosa e polenta",
+          "preco": "R$ 82,00"
+        },
+        {
+          "nome": "Frango + Batatas Fritas",
+          "ingredientes": "Filé de frango frito empanado, molho barbecue, maionese verde, maionese rosa e batatas",
+          "preco": "R$ 82,00"
+        },
+        {
+          "nome": "Frango + Batatas Fritas + Polenta",
+          "ingredientes": "Filé de frango frito empanado, molho barbecue, maionese verde, maionese rosa, batatas fritas e polenta",
+          "preco": "R$ 85,00"
+        }
+      ]
+    },
+    {
+      "id": "batatas-fritas",
+      "titulo": "BATATAS FRITAS",
+      "itens": [
+        {
+          "nome": "Batatas Fritas Simples",
+          "ingredientes": "Porção de batatas fritas",
+          "tamanhos": { "M": "R$ 27,00", "G": "R$ 37,00" }
+        },
+        {
+          "nome": "Batatas Fritas com Calabresa e Requeijão",
+          "ingredientes": "Porção de batatas fritas, calabresa e requeijão",
+          "tamanhos": { "M": "R$ 37,00", "G": "R$ 47,00" }
+        },
+        {
+          "nome": "Batatas Fritas com Bacon e Requeijão",
+          "ingredientes": "Porção de batatas fritas, bacon e requeijão",
+          "tamanhos": { "M": "R$ 37,00", "G": "R$ 47,00" }
+        }
+      ]
+    },
+    {
       "id": "massas",
       "titulo": "MASSAS",
       "itens": [
@@ -184,28 +309,23 @@
       ]
     },
     {
-      "id": "acai",
-      "titulo": "AÇAÍ",
+      "id": "paokecao",
+      "titulo": "PÃOKECÃO",
       "itens": [
         {
-          "nome": "Açaí Panquecão",
-          "sub": "Monte do seu jeito",
-          "tamanhos_acai": [
-            { "tamanho": "300ml", "obs": "3 complementos grátis", "preco": "R$ 16,00" },
-            { "tamanho": "500ml", "obs": "4 complementos grátis", "preco": "R$ 22,00" }
-          ],
-          "tags": [
-            "Leite Condensado",
-            "Leite Ninho",
-            "Granola",
-            "Granulado",
-            "Ovo Maltine",
-            "Confete",
-            "Paçoca",
-            "Creme de Morango",
-            "Creme de Avelã",
-            "Creme de Leite Ninho"
-          ]
+          "nome": "Carne de Panela",
+          "ingredientes": "Pão baguete, maionese verde, ketchup, mostarda, queijo na chapa, batata palha e carne de panela",
+          "preco": "R$ 25,00"
+        },
+        {
+          "nome": "Frango",
+          "ingredientes": "Pão baguete, maionese verde, ketchup, mostarda, queijo na chapa, batata palha e frango",
+          "preco": "R$ 25,00"
+        },
+        {
+          "nome": "Coração de Frango",
+          "ingredientes": "Pão baguete, maionese verde, ketchup, mostarda, queijo na chapa, batata palha e coração de frango",
+          "preco": "R$ 25,00"
         }
       ]
     },
@@ -213,49 +333,132 @@
       "id": "bebidas",
       "titulo": "BEBIDAS",
       "itens": [
+        { "nome": "Coca-Cola 2L", "preco": "R$ 16,00" },
+        { "nome": "Coca-Cola Zero 2L", "preco": "R$ 16,00" },
+        { "nome": "Coca-Cola Lata", "preco": "R$ 8,00" },
+        { "nome": "Coca-Cola Zero Lata", "preco": "R$ 8,00" },
+        { "nome": "Guaraná Lata", "preco": "R$ 8,00" },
+        { "nome": "Água Mineral 500ml", "preco": "R$ 5,00" },
+        { "nome": "Suco Natural Copo", "preco": "R$ 15,00" },
+        { "nome": "Cerveja Latão", "preco": "R$ 10,00" },
+        { "nome": "Cerveja Longneck", "preco": "R$ 12,00" },
+        { "nome": "Chopp Litro", "preco": "Consultar" },
+        { "nome": "Vinhos", "preco": "Consultar" }
+      ]
+    },
+    {
+      "id": "cocktails-com-alcool",
+      "titulo": "COCKTAILS COM ÁLCOOL",
+      "itens": [
         {
-          "nome": "Coca-Cola 2L",
-          "preco": "R$ 16,00"
+          "nome": "Caipira de Morango",
+          "ingredientes": "Vodka/Cachaça, morango, açúcar, leite condensado e hortelã",
+          "preco": "R$ 25,00"
         },
         {
-          "nome": "Coca-Cola Zero 2L",
-          "preco": "R$ 16,00"
+          "nome": "Caipira de Limão",
+          "ingredientes": "Vodka/Cachaça, limão, açúcar e hortelã",
+          "preco": "R$ 25,00"
         },
         {
-          "nome": "Coca-Cola Lata",
-          "preco": "R$ 8,00"
+          "nome": "Sex on the Beach",
+          "ingredientes": "Vodka, groselha, suco de manga, suco de laranja e leite condensado",
+          "preco": "R$ 25,00"
         },
         {
-          "nome": "Coca-Cola Zero Lata",
-          "preco": "R$ 8,00"
+          "nome": "Mojito",
+          "ingredientes": "Rum, refrigerante de limão, limão, açúcar, hortelã e gás",
+          "preco": "R$ 25,00"
         },
         {
-          "nome": "Guaraná Lata",
-          "preco": "R$ 8,00"
+          "nome": "Vodka Sunrise",
+          "ingredientes": "Vodka, suco de laranja, groselha e hortelã",
+          "preco": "R$ 25,00"
         },
         {
-          "nome": "Água Mineral 500ml",
-          "preco": "R$ 5,00"
+          "nome": "Tequila Sunrise",
+          "ingredientes": "Tequila, suco de laranja, groselha e hortelã",
+          "preco": "R$ 25,00"
         },
         {
-          "nome": "Suco Natural Copo",
-          "preco": "R$ 15,00"
+          "nome": "Sakerinha",
+          "ingredientes": "Sake, limão/morango, açúcar e leite condensado",
+          "preco": "R$ 25,00"
         },
         {
-          "nome": "Cerveja Latão",
-          "preco": "R$ 10,00"
+          "nome": "Margarita",
+          "ingredientes": "Tequila, suco de laranja, suco de limão, sal e hortelã",
+          "preco": "R$ 25,00"
         },
         {
-          "nome": "Cerveja Longneck",
-          "preco": "R$ 12,00"
+          "nome": "Martini Spritz",
+          "ingredientes": "Vermouth, refrigerante de limão, limão e gás",
+          "preco": "R$ 25,00"
+        },
+        {
+          "nome": "Lagoa Azul",
+          "ingredientes": "Vodka, Curaçau Azul, refrigerante de limão e gás",
+          "preco": "R$ 25,00"
+        },
+        {
+          "nome": "Coco Splash",
+          "ingredientes": "Curaçau Azul, água de coco, suco de laranja e gás",
+          "preco": "R$ 25,00"
+        },
+        {
+          "nome": "Fresh Paradise",
+          "ingredientes": "Vodka, suco de laranja, suco de manga, suco de limão e gás",
+          "preco": "R$ 25,00"
+        }
+      ]
+    },
+    {
+      "id": "cocktails-sem-alcool",
+      "titulo": "COCKTAILS SEM ÁLCOOL (MOCKTAILS)",
+      "itens": [
+        {
+          "nome": "Tropical Breeze",
+          "ingredientes": "Suco de manga, suco de laranja, suco de limão e gás",
+          "preco": "R$ 20,00"
+        },
+        {
+          "nome": "High Voltage",
+          "ingredientes": "Suco de laranja, suco de manga, energético e gás",
+          "preco": "R$ 20,00"
+        },
+        {
+          "nome": "Mango Dawnburst",
+          "ingredientes": "Suco de laranja, suco de manga, groselha e gás",
+          "preco": "R$ 20,00"
+        },
+        {
+          "nome": "Green Apple Zest",
+          "ingredientes": "Energético de maçã verde, suco de limão, açúcar e gás",
+          "preco": "R$ 20,00"
+        },
+        {
+          "nome": "Fresh Lemon",
+          "ingredientes": "Limão, água, hortelã e gás",
+          "preco": "R$ 20,00"
+        },
+        {
+          "nome": "Minty Splash",
+          "ingredientes": "Água com gás, limão, hortelã e gás",
+          "preco": "R$ 20,00"
+        },
+        {
+          "nome": "Limonada Suíça",
+          "ingredientes": "Limão, açúcar, leite condensado e gás",
+          "preco": "R$ 20,00"
         }
       ]
     }
   ],
   "observacoes": [
-    "Imagens meramente ilustrativas",
+    "Consulte a disponibilidade dos drinks",
+    "Todos os drinks com álcool podem ser feitos sem álcool",
     "Taxa de entrega sob consulta por bairro",
     "Tempo médio de preparo: 35 a 50 minutos",
-    "Aceitamos Cartões, Pix e Dinheiro"
+    "Aceitamos Cartões Alimentação, Refeição, Crédito, Débito, Pix e Dinheiro"
   ]
 }
