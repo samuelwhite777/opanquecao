@@ -32,72 +32,72 @@
       "itens": [
         {
           "nome": "Bacon",
-          "ingredientes": "Mussarela, bacon e oregano",
+          "ingredientes": "Mussarela, bacon e orégano",
           "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
         },
         {
           "nome": "Brocolis e Catupiry",
-          "ingredientes": "Brocolis, mussarela, requeijão e oregano",
+          "ingredientes": "Brocolis, mussarela, requeijão e orégano",
           "tamanhos": { "M": "R$ 21,00", "G": "R$ 31,00" }
         },
         {
           "nome": "Calabresa",
-          "ingredientes": "Calabresa, mussarela e oregano",
+          "ingredientes": "Calabresa, mussarela e orégano",
           "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
         },
         {
           "nome": "Carne de Panela",
-          "ingredientes": "Carne de panela ao molho, mussarela e oregano",
+          "ingredientes": "Carne de panela ao molho, mussarela e orégano",
           "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
         },
         {
           "nome": "Coração",
-          "ingredientes": "Coração ao molho, mussarela e oregano",
+          "ingredientes": "Coração ao molho, mussarela e orégano",
           "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
         },
         {
           "nome": "Estrogonofe de Carne",
-          "ingredientes": "Carne de panela ao molho, ketchup, creme de leite, mussarela e oregano",
+          "ingredientes": "Carne de panela ao molho, ketchup, creme de leite, mussarela e orégano",
           "tamanhos": { "M": "R$ 28,00", "G": "R$ 38,00" }
         },
         {
           "nome": "Estrogonofe de Frango",
-          "ingredientes": "Frango ao molho, ketchup, creme de leite, mussarela e oregano",
+          "ingredientes": "Frango ao molho, ketchup, creme de leite, mussarela e orégano",
           "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
         },
         {
           "nome": "Frango e Catupiry",
-          "ingredientes": "Frango ao molho, requeijão, mussarela e oregano",
+          "ingredientes": "Frango ao molho, requeijão, mussarela e orégano",
           "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
         },
         {
           "nome": "Milho e Mussarela",
-          "ingredientes": "Milho verde, mussarela e oregano",
+          "ingredientes": "Milho verde, mussarela e orégano",
           "tamanhos": { "M": "R$ 21,00", "G": "R$ 31,00" }
         },
         {
           "nome": "Mussarela",
-          "ingredientes": "Mussarela e oregano",
+          "ingredientes": "Mussarela e orégano",
           "tamanhos": { "M": "R$ 21,00", "G": "R$ 31,00" }
         },
         {
           "nome": "Quatro Queijos",
-          "ingredientes": "Mussarela, requeijão, parmesão, cheddar e oregano",
+          "ingredientes": "Mussarela, requeijão, parmesão, cheddar e orégano",
           "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
         },
         {
           "nome": "Presunto",
-          "ingredientes": "Presunto, mussarela e oregano",
+          "ingredientes": "Presunto, mussarela e orégano",
           "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
         },
         {
           "nome": "Panquegumes",
-          "ingredientes": "Brócolis, tomate, cebola, pimentão, milho, requeijão, mussarela e oregano",
+          "ingredientes": "Brócolis, tomate, cebola, pimentão, milho, requeijão, mussarela e orégano",
           "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
         },
         {
           "nome": "Portuguesa",
-          "ingredientes": "Presunto, cebola, tomate, azeitonas, mussarela, ovo e oregano",
+          "ingredientes": "Presunto, cebola, tomate, azeitonas, mussarela, ovo e orégano",
           "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
         },
         {
@@ -163,12 +163,12 @@
         },
         {
           "nome": "Choquito Branco",
-          "ingredientes": "Chocolate branco e flocitos de coco",
+          "ingredientes": "Chocolate branco e flocos de coco",
           "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
         },
         {
           "nome": "Choquito Preto",
-          "ingredientes": "Chocolate preto e flocitos de coco",
+          "ingredientes": "Chocolate preto e flocos de coco",
           "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
         },
         {
@@ -210,22 +210,22 @@
       "itens": [
         {
           "nome": "Estrogonofe de Frango",
-          "ingredientes": "Massa espaguete, frango, creme de leite, ketchup, mussarela, batata palha e oregano",
+          "ingredientes": "Massa espaguete, frango, creme de leite, ketchup, mussarela, batata palha e orégano",
           "preco": "R$ 49,00"
         },
         {
           "nome": "Frango e Catupiry",
-          "ingredientes": "Massa espaguete, frango, creme de leite, ketchup, mussarela, batata palha e oregano",
+          "ingredientes": "Massa espaguete, frango, creme de leite, ketchup, mussarela, batata palha e orégano",
           "preco": "R$ 49,00"
         },
         {
           "nome": "Estrogonofe de Carne",
-          "ingredientes": "Massa espaguete, carne de panela, creme de leite, ketchup, mussarela, batata palha e oregano",
+          "ingredientes": "Massa espaguete, carne de panela, creme de leite, ketchup, mussarela, batata palha e orégano",
           "preco": "R$ 49,00"
         },
         {
           "nome": "Carne de Panela",
-          "ingredientes": "Massa espaguete, carne de panela, creme de leite, ketchup, mussarela, batata palha e oregano",
+          "ingredientes": "Massa espaguete, carne de panela, creme de leite, ketchup, mussarela, batata palha e orégano",
           "preco": "R$ 49,00"
         },
         {
@@ -288,22 +288,22 @@
       "itens": [
         {
           "nome": "Massa a Carbonara",
-          "ingredientes": "Massa espaguete, bacon, gemas de ovo, parmesão",
+          "ingredientes": "Massa espaguete, bacon, gemas de ovo, parmesão e alho",
           "preco": "R$ 47,00"
         },
         {
           "nome": "Estrogonofe de Carne",
-          "ingredientes": "Massa espaguete, carne de panela, creme de leite, ketchup, mussarela, batata palha e oregano",
+          "ingredientes": "Massa espaguete, carne de panela, creme de leite, ketchup, mussarela, batata palha e orégano",
           "preco": "R$ 47,00"
         },
         {
           "nome": "Estrogonofe de Frango",
-          "ingredientes": "Massa espaguete, frango, creme de leite, ketchup, mussarela, batata palha e oregano",
+          "ingredientes": "Massa espaguete, frango, creme de leite, ketchup, mussarela, batata palha e orégano",
           "preco": "R$ 47,00"
         },
         {
           "nome": "Quatro Queijos",
-          "ingredientes": "Massa espaguete, mussarela, parmesão, cheddar, catupiry e oregano",
+          "ingredientes": "Massa espaguete, mussarela, parmesão, cheddar, catupiry e orégano",
           "preco": "R$ 47,00"
         }
       ]
@@ -367,7 +367,7 @@
         },
         {
           "nome": "Mojito",
-          "ingredientes": "Rum, refrigerante de limão, limão, açúcar, hortelã e gás",
+          "ingredientes": "Rum, refrigerante de limão, limão, açúcar, hortelã e Água com gás",
           "preco": "R$ 25,00"
         },
         {
@@ -392,22 +392,22 @@
         },
         {
           "nome": "Martini Spritz",
-          "ingredientes": "Vermouth, refrigerante de limão, limão e gás",
+          "ingredientes": "Vermouth, refrigerante de limão, limão e Água com gás",
           "preco": "R$ 25,00"
         },
         {
           "nome": "Lagoa Azul",
-          "ingredientes": "Vodka, Curaçau Azul, refrigerante de limão e gás",
+          "ingredientes": "Vodka, Curaçau Azul, refrigerante de limão e Água com gás",
           "preco": "R$ 25,00"
         },
         {
           "nome": "Coco Splash",
-          "ingredientes": "Curaçau Azul, água de coco, suco de laranja e gás",
+          "ingredientes": "Curaçau Azul, água de coco, suco de laranja e Água com gás",
           "preco": "R$ 25,00"
         },
         {
           "nome": "Fresh Paradise",
-          "ingredientes": "Vodka, suco de laranja, suco de manga, suco de limão e gás",
+          "ingredientes": "Vodka, suco de laranja, suco de manga, suco de limão e Água com gás",
           "preco": "R$ 25,00"
         }
       ]
@@ -418,37 +418,37 @@
       "itens": [
         {
           "nome": "Tropical Breeze",
-          "ingredientes": "Suco de manga, suco de laranja, suco de limão e gás",
+          "ingredientes": "Suco de manga, suco de laranja, suco de limão e Água com gás",
           "preco": "R$ 20,00"
         },
         {
           "nome": "High Voltage",
-          "ingredientes": "Suco de laranja, suco de manga, energético e gás",
+          "ingredientes": "Suco de laranja, suco de manga, energético e Água com gás",
           "preco": "R$ 20,00"
         },
         {
           "nome": "Mango Dawnburst",
-          "ingredientes": "Suco de laranja, suco de manga, groselha e gás",
+          "ingredientes": "Suco de laranja, suco de manga, groselha e Água com gás",
           "preco": "R$ 20,00"
         },
         {
           "nome": "Green Apple Zest",
-          "ingredientes": "Energético de maçã verde, suco de limão, açúcar e gás",
+          "ingredientes": "Energético de maçã verde, suco de limão, açúcar e Água com gás",
           "preco": "R$ 20,00"
         },
         {
           "nome": "Fresh Lemon",
-          "ingredientes": "Limão, água, hortelã e gás",
+          "ingredientes": "Limão, água, hortelã e Água com gás",
           "preco": "R$ 20,00"
         },
         {
           "nome": "Minty Splash",
-          "ingredientes": "Água com gás, limão, hortelã e gás",
+          "ingredientes": "Água com Água com gás, limão, hortelã e Água com gás",
           "preco": "R$ 20,00"
         },
         {
           "nome": "Limonada Suíça",
-          "ingredientes": "Limão, açúcar, leite condensado e gás",
+          "ingredientes": "Limão, açúcar, leite condensado e Água com gás",
           "preco": "R$ 20,00"
         }
       ]
