@@ -1,105 +1,261 @@
-
 {
-"categorias": [
-{
-"id": "panquecas-salgadas",
-"titulo": "Panquecas Salgadas",
-"itens": [
-{
-"nome": "Carne Moída",
-"ingredientes": "Molho de tomate, carne moída perfeitamente temperada e queijo mussarela.",
-"tamanhos": { "P": "R$ 22,00", "M": "R$ 28,00", "G": "R$ 35,00" }
-},
-{
-"nome": "Frango com Catupiry",
-"ingredientes": "Frango desfiado suculento, catupiry original e queijo mussarela.",
-"tamanhos": { "P": "R$ 23,00", "M": "R$ 29,00", "G": "R$ 36,00" }
-},
-{
-"nome": "Coração",
-"ingredientes": "Coração de frango grelhado, molho especial e queijo mussarela.",
-"tamanhos": { "P": "R$ 25,00", "M": "R$ 32,00", "G": "R$ 40,00" }
-},
-{
-"nome": "Calabresa",
-"ingredientes": "Calabresa fatiada, cebola, molho de tomate e queijo mussarela.",
-"tamanhos": { "P": "R$ 22,00", "M": "R$ 28,00", "G": "R$ 35,00" }
-},
-{
-"nome": "Portuguesa",
-"ingredientes": "Presunto, ovo, cebola, ervilha, milho e queijo mussarela.",
-"tamanhos": { "P": "R$ 24,00", "M": "R$ 30,00", "G": "R$ 38,00" }
-}
-]
-},
-{
-"id": "panquecas-doces",
-"titulo": "Panquecas Doces",
-"itens": [
-{
-"nome": "Chocolate com Morango",
-"ingredientes": "Chocolate ao leite cremoso e morangos frescos fatiados.",
-"tamanhos": { "P": "R$ 20,00", "M": "R$ 26,00", "G": "R$ 32,00" }
-},
-{
-"nome": "Doce de Leite",
-"ingredientes": "Doce de leite artesanal e uma pitada de canela.",
-"tamanhos": { "P": "R$ 18,00", "M": "R$ 24,00", "G": "R$ 30,00" }
-},
-{
-"nome": "Prestígio",
-"ingredientes": "Chocolate ao leite e coco ralado generoso.",
-"tamanhos": { "P": "R$ 20,00", "M": "R$ 26,00", "G": "R$ 32,00" }
-}
-]
-},
-{
-"id": "massas",
-"titulo": "Massas",
-"itens": [
-{
-"nome": "Espaguete à Bolonhesa",
-"ingredientes": "Massa al dente com molho de carne moída e queijo ralado.",
-"preco": "R$ 25,00"
-},
-{
-"nome": "Lasanha de Frango",
-"ingredientes": "Camadas de massa, frango, molho branco e muita mussarela.",
-"preco": "R$ 32,00"
-}
-]
-},
-{
-"id": "acai",
-"titulo": "Açaí",
-"itens": [
-{
-"nome": "Açaí Tradicional",
-"sub": "Monte do seu jeito",
-"tamanhos_acai": [
-{ "tamanho": "300ml", "obs": "Acompanha 3 acompanhamentos", "preco": "R$ 15,00" },
-{ "tamanho": "500ml", "obs": "Acompanha 4 acompanhamentos", "preco": "R$ 20,00" },
-{ "tamanho": "700ml", "obs": "Acompanha 5 acompanhamentos", "preco": "R$ 25,00" }
-],
-"tags": ["Leite em Pó", "Granola", "Banana", "Leite Condensado", "Morango"]
-}
-]
-},
-{
-"id": "bebidas",
-"titulo": "Bebidas",
-"itens": [
-{ "nome": "Refrigerante Lata", "preco": "R$ 6,00" },
-{ "nome": "Refrigerante 2L", "preco": "R$ 12,00" },
-{ "nome": "Suco Natural", "preco": "R$ 8,00" },
-{ "nome": "Água Mineral", "preco": "R$ 4,00" }
-]
-}
-],
-"observacoes": [
-"Taxa de entrega sob consulta por bairro.",
-"Tempo médio de preparo: 20 a 40 minutos.",
-"Aceitamos Cartões, Pix e Dinheiro.",
-"Imagens meramente ilustrativas."
-]
+  "categorias": [
+    {
+      "id": "panquecas-salgadas",
+      "titulo": "PANQUECAS SALGADAS",
+      "itens": [
+        {
+          "nome": "Bacon",
+          "ingredientes": "Mussarela, bacon e oregano",
+          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+        },
+        {
+          "nome": "Brocolis e Catupiry",
+          "ingredientes": "Brocolis, mussarela, requeijão e oregano",
+          "tamanhos": { "M": "R$ 21,00", "G": "R$ 31,00" }
+        },
+        {
+          "nome": "Calabresa",
+          "ingredientes": "Calabresa, mussarela e oregano",
+          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+        },
+        {
+          "nome": "Carne de Panela",
+          "ingredientes": "Carne de panela ao molho, mussarela e oregano",
+          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
+        },
+        {
+          "nome": "Coração",
+          "ingredientes": "Coração ao molho, mussarela e oregano",
+          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+        },
+        {
+          "nome": "Estrogonofe de Carne",
+          "ingredientes": "Carne de panela ao molho, ketchup, creme de leite, mussarela e oregano",
+          "tamanhos": { "M": "R$ 28,00", "G": "R$ 38,00" }
+        },
+        {
+          "nome": "Estrogonofe de Frango",
+          "ingredientes": "Frango ao molho, ketchup, creme de leite, mussarela e oregano",
+          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+        },
+        {
+          "nome": "Frango e Catupiry",
+          "ingredientes": "Frango ao molho, requeijão, mussarela e oregano",
+          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+        },
+        {
+          "nome": "Milho e Mussarela",
+          "ingredientes": "Milho verde, mussarela e oregano",
+          "tamanhos": { "M": "R$ 21,00", "G": "R$ 31,00" }
+        },
+        {
+          "nome": "Mussarela",
+          "ingredientes": "Mussarela e oregano",
+          "tamanhos": { "M": "R$ 21,00", "G": "R$ 31,00" }
+        },
+        {
+          "nome": "Quatro Queijos",
+          "ingredientes": "Mussarela, requeijão, parmesão, cheddar e oregano",
+          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+        },
+        {
+          "nome": "Presunto",
+          "ingredientes": "Presunto, mussarela e oregano",
+          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+        },
+        {
+          "nome": "Panquegumes",
+          "ingredientes": "Brócolis, tomate, cebola, pimentão, milho, requeijão, mussarela e oregano",
+          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+        },
+        {
+          "nome": "Portuguesa",
+          "ingredientes": "Presunto, cebola, tomate, azeitonas, mussarela, ovo e oregano",
+          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+        },
+        {
+          "nome": "Panquetudo (Especial)",
+          "ingredientes": "Carne de panela ao molho, coração, frango ao molho, calabresa, bacon, mussarela, molho barbecue, batata palha, milho",
+          "tamanhos": { "M": "R$ 30,00", "G": "R$ 40,00" }
+        }
+      ]
+    },
+    {
+      "id": "panquecas-doces",
+      "titulo": "PANQUECAS DOCES",
+      "itens": [
+        {
+          "nome": "Banana e Canela",
+          "ingredientes": "Banana e canela",
+          "tamanhos": { "M": "R$ 21,00", "G": "R$ 31,00" }
+        },
+        {
+          "nome": "Banana e Canela Cremosa",
+          "ingredientes": "Banana, canela e leite condensado",
+          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+        },
+        {
+          "nome": "Chocolate Branco",
+          "ingredientes": "Chocolate branco",
+          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
+        },
+        {
+          "nome": "Chocolate Preto",
+          "ingredientes": "Chocolate preto",
+          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+        },
+        {
+          "nome": "Chocolate Branco e Confetes",
+          "ingredientes": "Chocolate branco e confetes",
+          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
+        },
+        {
+          "nome": "Chocolate Preto e Confetes",
+          "ingredientes": "Chocolate preto e confetes",
+          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+        },
+        {
+          "nome": "Chocolate Branco e Morango",
+          "ingredientes": "Chocolate branco e morango",
+          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
+        },
+        {
+          "nome": "Chocolate Preto e Morango",
+          "ingredientes": "Chocolate preto e morango",
+          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+        },
+        {
+          "nome": "Chocolate Branco e Óreo",
+          "ingredientes": "Chocolate branco e biscoito Óreo",
+          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
+        },
+        {
+          "nome": "Chocolate Preto e Óreo",
+          "ingredientes": "Chocolate preto e biscoito Óreo",
+          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+        },
+        {
+          "nome": "Choquito Branco",
+          "ingredientes": "Chocolate branco e flocitos de coco",
+          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
+        },
+        {
+          "nome": "Choquito Preto",
+          "ingredientes": "Chocolate preto e flocitos de coco",
+          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+        },
+        {
+          "nome": "Prestigio Branco",
+          "ingredientes": "Chocolate branco e coco em flocos",
+          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
+        },
+        {
+          "nome": "Prestigio Preto",
+          "ingredientes": "Chocolate preto e coco em flocos",
+          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
+        }
+      ]
+    },
+    {
+      "id": "massas",
+      "titulo": "MASSAS",
+      "itens": [
+        {
+          "nome": "Massa a Carbonara",
+          "ingredientes": "Massa espaguete, bacon, gemas de ovo, parmesão, alho e pimenta",
+          "preco": "R$ 47,00"
+        },
+        {
+          "nome": "Estrogonofe de Carne",
+          "ingredientes": "Massa espaguete, carne de panela, creme de leite, ketchup, mussarela, batata palha e oregano",
+          "preco": "R$ 47,00"
+        },
+        {
+          "nome": "Estrogonofe de Frango",
+          "ingredientes": "Massa espaguete, frango, creme de leite, ketchup, mussarela, batata palha e oregano",
+          "preco": "R$ 47,00"
+        },
+        {
+          "nome": "Quatro Queijos",
+          "ingredientes": "Massa espaguete, mussarela, parmesão, cheddar, catupiry e oregano",
+          "preco": "R$ 47,00"
+        }
+      ]
+    },
+    {
+      "id": "acai",
+      "titulo": "AÇAÍ",
+      "itens": [
+        {
+          "nome": "Açaí Panquecão",
+          "sub": "Monte do seu jeito",
+          "tamanhos_acai": [
+            { "tamanho": "300ml", "obs": "3 complementos grátis", "preco": "R$ 16,00" },
+            { "tamanho": "500ml", "obs": "4 complementos grátis", "preco": "R$ 22,00" }
+          ],
+          "tags": [
+            "Leite Condensado",
+            "Leite Ninho",
+            "Granola",
+            "Granulado",
+            "Ovo Maltine",
+            "Confete",
+            "Paçoca",
+            "Creme de Morango",
+            "Creme de Avelã",
+            "Creme de Leite Ninho"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "bebidas",
+      "titulo": "BEBIDAS",
+      "itens": [
+        {
+          "nome": "Coca-Cola 2L",
+          "preco": "R$ 16,00"
+        },
+        {
+          "nome": "Coca-Cola Zero 2L",
+          "preco": "R$ 16,00"
+        },
+        {
+          "nome": "Coca-Cola Lata",
+          "preco": "R$ 8,00"
+        },
+        {
+          "nome": "Coca-Cola Zero Lata",
+          "preco": "R$ 8,00"
+        },
+        {
+          "nome": "Guaraná Lata",
+          "preco": "R$ 8,00"
+        },
+        {
+          "nome": "Água Mineral 500ml",
+          "preco": "R$ 5,00"
+        },
+        {
+          "nome": "Suco Natural Copo",
+          "preco": "R$ 15,00"
+        },
+        {
+          "nome": "Cerveja Latão",
+          "preco": "R$ 10,00"
+        },
+        {
+          "nome": "Cerveja Longneck",
+          "preco": "R$ 12,00"
+        }
+      ]
+    }
+  ],
+  "observacoes": [
+    "Imagens meramente ilustrativas",
+    "Taxa de entrega sob consulta por bairro",
+    "Tempo médio de preparo: 35 a 50 minutos",
+    "Aceitamos Cartões, Pix e Dinheiro"
+  ]
 }
