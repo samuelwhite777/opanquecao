@@ -242,7 +242,7 @@
         {
           "nome": "Frango Frito Crocrante no Pote",
           "ingredientes": "Filé de frango frito empanado, molho barbecue, maionese verde e maionese rosa",
-          "preco": "R$ 82,00"
+          "preco": "R$ 60,00"
         },
         {
           "nome": "Frango + Polenta",
@@ -271,13 +271,13 @@
           "tamanhos": { "M": "R$ 27,00", "G": "R$ 37,00" }
         },
         {
-          "nome": "Batatas Fritas com Calabresa e Requeijão",
-          "ingredientes": "Porção de batatas fritas, calabresa e requeijão",
+          "nome": "Batatas Fritas com Calabresa e Requeijão/Cheddar",
+          "ingredientes": "Porção de batatas fritas, calabresa e requeijão e/ou cheddar",
           "tamanhos": { "M": "R$ 37,00", "G": "R$ 47,00" }
         },
         {
-          "nome": "Batatas Fritas com Bacon e Requeijão",
-          "ingredientes": "Porção de batatas fritas, bacon e requeijão",
+          "nome": "Batatas Fritas com Bacon e Requeijão/Cheddar",
+          "ingredientes": "Porção de batatas fritas, bacon e requeijão e/ou cheddar",
           "tamanhos": { "M": "R$ 37,00", "G": "R$ 47,00" }
         }
       ]
@@ -288,7 +288,7 @@
       "itens": [
         {
           "nome": "Massa a Carbonara",
-          "ingredientes": "Massa espaguete, bacon, gemas de ovo, parmesão, alho e pimenta",
+          "ingredientes": "Massa espaguete, bacon, gemas de ovo, parmesão",
           "preco": "R$ 47,00"
         },
         {
