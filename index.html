@@ -12,7 +12,7 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
 
-    <!-- Meta Pixel Code - VERSÃO OTIMIZADA PARA RESTAURANTE -->
+    <!-- Meta Pixel Code - VERSÃO INSTANTÂNEA -->
     <script>
         !function(f,b,e,v,n,t,s)
         {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -23,70 +23,39 @@
         s.parentNode.insertBefore(t,s)}(window, document,'script',
         'https://connect.facebook.net/en_US/fbevents.js');
         
-        // Inicializa o Pixel
         fbq('init', '766179976513223');
         fbq('track', 'PageView');
         
-        // RASTREAR CLIQUE NO WHATSAPP (Conversão Principal)
-        document.addEventListener('DOMContentLoaded', function() {
-            const whatsappBtn = document.querySelector('.whatsapp-float');
-            const categoryLinks = document.querySelectorAll('.category-link');
-            const menuItems = document.querySelectorAll('.menu-item');
-        
-            // Evento de clique no WhatsApp (Lead qualificado)
-            if (whatsappBtn) {
-                whatsappBtn.addEventListener('click', function() {
-                    fbq('track', 'Contact', {
-                        content_category: 'pedido_whatsapp',
-                        content_name: 'Botão Flutuante WhatsApp',
-                        value: 0.00,
-                        currency: 'BRL'
-                    });
-                });
-            }
-        
-            // Rastrear cliques nas categorias (engajamento)
-            categoryLinks.forEach(link => {
-                link.addEventListener('click', function() {
-                    fbq('track', 'ViewContent', {
-                        content_type: 'product_group',
-                        content_category: this.textContent.trim(),
-                        content_ids: [this.getAttribute('href').replace('#', '')],
-                        content_name: this.textContent.trim()
-                    });
-                });
+        // ESPERA O PIXEL CARREGAR completamente
+        function initPixelEvents() {
+          if (typeof fbq === 'undefined') {
+            console.error('❌ ERRO CRÍTICO: Pixel não carregou!'); 
+            return;
+          }
+          
+          console.log('✅ Pixel carregado! ID:', fbq.getState ? fbq.getState().pixelId : 'N/A');
+          
+          // WHATSAPP TRACKING
+          const whatsappBtn = document.querySelector('.whatsapp-float');
+          if (whatsappBtn) {
+            whatsappBtn.addEventListener('click', function() {
+              console.log('📱 EVENTO: Clique no WhatsApp'); // Debug visível
+              fbq('track', 'Contact', {
+                content_category: 'pedido_whatsapp',
+                content_name: 'Botão Flutuante WhatsApp',
+                value: 0.00,
+                currency: 'BRL'
+              });
             });
+          }
+        }
         
-            // Rastrear visualização de itens (depois de rolar até eles)
-            const observerOptions = {
-                threshold: 0.5,
-                rootMargin: '0px 0px -100px 0px'
-            };
-        
-            const itemObserver = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const itemTitle = entry.target.querySelector('.item-title').textContent;
-                        const itemCategory = entry.target.closest('.category-section').id;
-                        
-                        fbq('track', 'ViewContent', {
-                            content_type: 'product',
-                            content_ids: [itemCategory + '_' + itemTitle.replace(/\s+/g, '_')],
-                            content_name: itemTitle,
-                            content_category: itemCategory,
-                            value: 0.00,
-                            currency: 'BRL'
-                        });
-                        
-                        itemObserver.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-        
-            menuItems.forEach(item => {
-                itemObserver.observe(item);
-            });
-        });
+        // Garante execução após carregamento
+        if (document.readyState === 'loading') {
+          document.addEventListener('DOMContentLoaded', initPixelEvents);
+        } else {
+          initPixelEvents();
+        }
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=766179976513223&ev=PageView&noscript=1"
