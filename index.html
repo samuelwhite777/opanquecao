@@ -11,18 +11,82 @@
     <link rel="icon" type="image/png" sizes="16x16"  href="favicons/favicon-16x16.png">
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="theme-color" content="#ffffff">
-    <!-- Meta Pixel Code -->
+
+    <!-- Meta Pixel Code - VERSÃO OTIMIZADA PARA RESTAURANTE -->
     <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '766179976513223');
-    fbq('track', 'PageView');
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        
+        // Inicializa o Pixel
+        fbq('init', '766179976513223');
+        fbq('track', 'PageView');
+        
+        // RASTREAR CLIQUE NO WHATSAPP (Conversão Principal)
+        document.addEventListener('DOMContentLoaded', function() {
+            const whatsappBtn = document.querySelector('.whatsapp-float');
+            const categoryLinks = document.querySelectorAll('.category-link');
+            const menuItems = document.querySelectorAll('.menu-item');
+        
+            // Evento de clique no WhatsApp (Lead qualificado)
+            if (whatsappBtn) {
+                whatsappBtn.addEventListener('click', function() {
+                    fbq('track', 'Contact', {
+                        content_category: 'pedido_whatsapp',
+                        content_name: 'Botão Flutuante WhatsApp',
+                        value: 0.00,
+                        currency: 'BRL'
+                    });
+                });
+            }
+        
+            // Rastrear cliques nas categorias (engajamento)
+            categoryLinks.forEach(link => {
+                link.addEventListener('click', function() {
+                    fbq('track', 'ViewContent', {
+                        content_type: 'product_group',
+                        content_category: this.textContent.trim(),
+                        content_ids: [this.getAttribute('href').replace('#', '')],
+                        content_name: this.textContent.trim()
+                    });
+                });
+            });
+        
+            // Rastrear visualização de itens (depois de rolar até eles)
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px 0px -100px 0px'
+            };
+        
+            const itemObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const itemTitle = entry.target.querySelector('.item-title').textContent;
+                        const itemCategory = entry.target.closest('.category-section').id;
+                        
+                        fbq('track', 'ViewContent', {
+                            content_type: 'product',
+                            content_ids: [itemCategory + '_' + itemTitle.replace(/\s+/g, '_')],
+                            content_name: itemTitle,
+                            content_category: itemCategory,
+                            value: 0.00,
+                            currency: 'BRL'
+                        });
+                        
+                        itemObserver.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+        
+            menuItems.forEach(item => {
+                itemObserver.observe(item);
+            });
+        });
     </script>
     <noscript><img height="1" width="1" style="display:none"
     src="https://www.facebook.com/tr?id=766179976513223&ev=PageView&noscript=1"
