@@ -37,7 +37,7 @@
         {
           "nome": "Bacon",
           "ingredientes": "Mussarela, bacon e orégano",
-          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
         },
         {
           "nome": "Brocolis e Catupiry",
@@ -47,12 +47,12 @@
         {
           "nome": "Calabresa",
           "ingredientes": "Calabresa, mussarela e orégano",
-          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
         },
         {
           "nome": "Carne de Panela",
           "ingredientes": "Carne de panela ao molho, mussarela e orégano",
-          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
+          "tamanhos": { "M": "R$ 28,00", "G": "R$ 38,00" }
         },
         {
           "nome": "Coração",
@@ -67,12 +67,12 @@
         {
           "nome": "Estrogonofe de Frango",
           "ingredientes": "Frango ao molho, ketchup, creme de leite, mussarela e orégano",
-          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
         },
         {
           "nome": "Frango e Catupiry",
           "ingredientes": "Frango ao molho, requeijão, mussarela e orégano",
-          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
         },
         {
           "nome": "Milho e Mussarela",
@@ -87,7 +87,7 @@
         {
           "nome": "Quatro Queijos",
           "ingredientes": "Mussarela, requeijão, parmesão, cheddar e orégano",
-          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
         },
         {
           "nome": "Presunto",
@@ -97,7 +97,7 @@
         {
           "nome": "Panquegumes",
           "ingredientes": "Brócolis, tomate, cebola, pimentão, milho, requeijão, mussarela e orégano",
-          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
         },
         {
           "nome": "Portuguesa",
@@ -133,7 +133,7 @@
         {
           "nome": "Chocolate Preto",
           "ingredientes": "Chocolate preto",
-          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
         },
         {
           "nome": "Chocolate Branco e Confetes",
@@ -143,7 +143,7 @@
         {
           "nome": "Chocolate Preto e Confetes",
           "ingredientes": "Chocolate preto e confetes",
-          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
         },
         {
           "nome": "Chocolate Branco e Morango",
@@ -153,7 +153,7 @@
         {
           "nome": "Chocolate Preto e Morango",
           "ingredientes": "Chocolate preto e morango",
-          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
         },
         {
           "nome": "Chocolate Branco e Óreo",
@@ -163,7 +163,7 @@
         {
           "nome": "Chocolate Preto e Óreo",
           "ingredientes": "Chocolate preto e biscoito Óreo",
-          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
         },
         {
           "nome": "Choquito Branco",
@@ -173,7 +173,7 @@
         {
           "nome": "Choquito Preto",
           "ingredientes": "Chocolate preto e flocos de coco",
-          "tamanhos": { "M": "R$ 24,00", "G": "R$ 34,00" }
+          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
         },
         {
           "nome": "Prestigio Branco",
@@ -183,7 +183,7 @@
         {
           "nome": "Prestigio Preto",
           "ingredientes": "Chocolate preto e coco em flocos",
-          "tamanhos": { "M": "R$ 26,00", "G": "R$ 36,00" }
+          "tamanhos": { "M": "R$ 28,00", "G": "R$ 38,00" }
         }
       ]
     },
@@ -462,7 +462,7 @@
     "Consulte a disponibilidade dos drinks",
     "Todos os drinks com álcool podem ser feitos sem álcool",
     "Taxa de entrega sob consulta por bairro",
-    "Tempo médio de preparo: 35 a 50 minutos",
+    "Tempo médio de preparo: 45 a 55 minutos",
     "Aceitamos Cartões Alimentação, Refeição, Crédito, Débito, Pix e Dinheiro"
   ]
 }
