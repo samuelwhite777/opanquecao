@@ -339,12 +339,12 @@
       "itens": [
         { "nome": "Coca-Cola 2L", "preco": "R$ 16,00" },
         { "nome": "Coca-Cola Zero 2L", "preco": "R$ 16,00" },
-        { "nome": "Coca-Cola Lata", "preco": "R$ 8,00" },
-        { "nome": "Coca-Cola Zero Lata", "preco": "R$ 8,00" },
+        { "nome": "Coca-Cola Lata", "preco": "R$ 10,00" },
+        { "nome": "Coca-Cola Zero Lata", "preco": "R$ 10,00" },
         { "nome": "Guaraná Lata", "preco": "R$ 8,00" },
         { "nome": "Água Mineral 500ml", "preco": "R$ 5,00" },
         { "nome": "Suco Natural Copo", "preco": "R$ 15,00" },
-        { "nome": "Cerveja Latão", "preco": "R$ 10,00" },
+        { "nome": "Cerveja Latão", "preco": "R$ 12,00" },
         { "nome": "Cerveja Longneck", "preco": "R$ 12,00" },
         { "nome": "Chopp Litro", "preco": "Consultar" },
         { "nome": "Vinhos", "preco": "Consultar" }
@@ -357,62 +357,62 @@
         {
           "nome": "Caipira de Morango",
           "ingredientes": "Vodka/Cachaça, morango, açúcar, leite condensado e hortelã",
-          "preco": "R$ 25,00"
+          "preco": "R$ 30,00"
         },
         {
           "nome": "Caipira de Limão",
           "ingredientes": "Vodka/Cachaça, limão, açúcar e hortelã",
-          "preco": "R$ 25,00"
+          "preco": "R$ 30,00"
         },
         {
           "nome": "Sex on the Beach",
           "ingredientes": "Vodka, groselha, suco de manga, suco de laranja e leite condensado",
-          "preco": "R$ 25,00"
+          "preco": "R$ 30,00"
         },
         {
           "nome": "Mojito",
           "ingredientes": "Rum, refrigerante de limão, limão, açúcar, hortelã e Água com gás",
-          "preco": "R$ 25,00"
+          "preco": "R$ 30,00"
         },
         {
           "nome": "Vodka Sunrise",
           "ingredientes": "Vodka, suco de laranja, groselha e hortelã",
-          "preco": "R$ 25,00"
+          "preco": "R$ 30,00"
         },
         {
           "nome": "Tequila Sunrise",
           "ingredientes": "Tequila, suco de laranja, groselha e hortelã",
-          "preco": "R$ 25,00"
+          "preco": "R$ 30,00"
         },
         {
           "nome": "Sakerinha",
           "ingredientes": "Sake, limão/morango, açúcar e leite condensado",
-          "preco": "R$ 25,00"
+          "preco": "R$ 30,00"
         },
         {
           "nome": "Margarita",
           "ingredientes": "Tequila, suco de laranja, suco de limão, sal e hortelã",
-          "preco": "R$ 25,00"
+          "preco": "R$ 30,00"
         },
         {
           "nome": "Martini Spritz",
           "ingredientes": "Vermouth, refrigerante de limão, limão e Água com gás",
-          "preco": "R$ 25,00"
+          "preco": "R$ 30,00"
         },
         {
           "nome": "Lagoa Azul",
           "ingredientes": "Vodka, Curaçau Azul, refrigerante de limão e Água com gás",
-          "preco": "R$ 25,00"
+          "preco": "R$ 30,00"
         },
         {
           "nome": "Coco Splash",
           "ingredientes": "Curaçau Azul, água de coco, suco de laranja e Água com gás",
-          "preco": "R$ 25,00"
+          "preco": "R$ 30,00"
         },
         {
           "nome": "Fresh Paradise",
           "ingredientes": "Vodka, suco de laranja, suco de manga, suco de limão e Água com gás",
-          "preco": "R$ 25,00"
+          "preco": "R$ 30,00"
         }
       ]
     },
@@ -423,37 +423,37 @@
         {
           "nome": "Tropical Breeze",
           "ingredientes": "Suco de manga, suco de laranja, suco de limão e Água com gás",
-          "preco": "R$ 20,00"
+          "preco": "R$ 25,00"
         },
         {
           "nome": "High Voltage",
           "ingredientes": "Suco de laranja, suco de manga, energético e Água com gás",
-          "preco": "R$ 20,00"
+          "preco": "R$ 25,00"
         },
         {
           "nome": "Mango Dawnburst",
           "ingredientes": "Suco de laranja, suco de manga, groselha e Água com gás",
-          "preco": "R$ 20,00"
+          "preco": "R$ 25,00"
         },
         {
           "nome": "Green Apple Zest",
           "ingredientes": "Energético de maçã verde, suco de limão, açúcar e Água com gás",
-          "preco": "R$ 20,00"
+          "preco": "R$ 25,00"
         },
         {
           "nome": "Fresh Lemon",
           "ingredientes": "Limão, água, hortelã e Água com gás",
-          "preco": "R$ 20,00"
+          "preco": "R$ 25,00"
         },
         {
           "nome": "Minty Splash",
           "ingredientes": "Água com Água com gás, limão, hortelã e Água com gás",
-          "preco": "R$ 20,00"
+          "preco": "R$ 25,00"
         },
         {
           "nome": "Limonada Suíça",
           "ingredientes": "Limão, açúcar, leite condensado e Água com gás",
-          "preco": "R$ 20,00"
+          "preco": "R$ 25,00"
         }
       ]
     }
