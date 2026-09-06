@@ -8,8 +8,8 @@
           "nome": "Açaí Panquecão",
           "sub": "Monte do seu jeito",
           "tamanhos_acai": [
-            { "tamanho": "300ml", "obs": "3 complementos grátis", "preco": "R$ 16,00" },
-            { "tamanho": "500ml", "obs": "4 complementos grátis", "preco": "R$ 22,00" },
+            { "tamanho": "300ml", "obs": "3 complementos grátis", "preco": "R$ 20,00" },
+            { "tamanho": "500ml", "obs": "4 complementos grátis", "preco": "R$ 28,00" },
             { "tamanho": "Adicional de Nutella", "obs": "Adicional pago", "preco": "R$ 5,00" },
             { "tamanho": "Adicional de Banana", "obs": "Adicional pago", "preco": "R$ 5,00" },
             { "tamanho": "Adicional de Abacaxi", "obs": "Adicional pago", "preco": "R$ 5,00" },
